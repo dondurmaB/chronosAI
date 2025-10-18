@@ -16,6 +16,10 @@
       "dest": "/public/demo_img.jpg"
     },
     {
+      "src": "/logo_img.jpg",
+      "dest": "/public/logo_img.jpg"
+    },
+    {
       "src": "/(.*)",
       "dest": "server.js"
     }
