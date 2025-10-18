@@ -253,7 +253,7 @@
 
         /* Email Form Section */
         .email-section {
-            padding: 80px 0;
+            padding: 50px 0 120px 0;
             background: white;
         }
 
@@ -323,16 +323,131 @@
             display: none;
         }
 
-        .form-message.success {
-            background: #d1fae5;
-            color: #065f46;
-            display: block;
-        }
-
         .form-message.error {
             background: #fee2e2;
             color: #991b1b;
             display: block;
+        }
+
+        /* Success Modal */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            padding: 50px 40px 50px 40px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: slideUp 0.4s ease;
+            position: relative;
+        }
+
+        .modal-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 25px;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3);
+        }
+
+        .modal-icon svg {
+            width: 45px;
+            height: 45px;
+            stroke: white;
+            fill: none;
+            stroke-width: 3;
+        }
+
+        .modal-content h3 {
+            font-size: 32px;
+            margin-bottom: 15px;
+            color: #1a1a1a;
+            font-weight: 700;
+        }
+
+        .modal-content p {
+            font-size: 17px;
+            color: #4a5568;
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+
+        .modal-close-btn {
+            width: 100%;
+            padding: 14px 32px;
+            background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 40px;
+        }
+
+        .modal-close-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(139, 92, 246, 0.4);
+        }
+
+        .close-x {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 32px;
+            height: 32px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #9ca3af;
+            font-size: 24px;
+            transition: color 0.3s;
+        }
+
+        .close-x:hover {
+            color: #1a1a1a;
         }
 
         /* Benefits Section */
@@ -452,7 +567,7 @@
 
         /* Footer */
         footer {
-            padding: 40px 0;
+            padding: 25px 0;
             text-align: center;
             color: #6b7280;
             background: #fafafa;
@@ -584,27 +699,6 @@
         </div>
     </section>
 
-    <!-- Email Sign Up Section -->
-    <section class="email-section" id="waitlist">
-        <div class="container">
-            <div class="email-container">
-                <h2>Join the Waitlist</h2>
-                <p>Be among the first to experience AI-powered scheduling. Get notified when we launch.</p>
-                <form class="email-form" id="emailForm">
-                    <input 
-                        type="email" 
-                        class="email-input" 
-                        placeholder="Enter your email address" 
-                        required
-                        id="emailInput"
-                    >
-                    <button type="submit" class="email-button">Get Early Access</button>
-                </form>
-                <div class="form-message" id="formMessage"></div>
-            </div>
-        </div>
-    </section>
-
     <!-- Benefits Section -->
     <section class="benefits" id="benefits">
         <div class="container">
@@ -657,6 +751,43 @@
         </div>
     </section>
 
+    <!-- Email Sign Up Section -->
+    <section class="email-section" id="waitlist">
+        <div class="container">
+            <div class="email-container">
+                <h2>Join the Waitlist</h2>
+                <p>Be among the first to experience AI-powered scheduling. Get notified when we launch.</p>
+                <form class="email-form" id="emailForm">
+                    <input
+                        type="email"
+                        class="email-input"
+                        placeholder="Enter your email address"
+                        required
+                        id="emailInput"
+                    >
+                    <button type="submit" class="email-button">Get Early Access</button>
+                </form>
+                <div class="form-message" id="formMessage"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Success Modal -->
+    <div class="modal-overlay" id="successModal">
+        <div class="modal-content">
+            <button class="close-x" onclick="closeModal()">&times;</button>
+            <div class="modal-icon">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <polyline points="20 6 9 17 4 12"/>
+                </svg>
+            </div>
+            <h3>Thank You!</h3>
+            <p>You're on the list! We'll notify you as soon as we launch.</p>
+            <p style="margin-bottom: 0;">Check your email for updates.</p>
+            <button class="modal-close-btn" onclick="closeModal()">Got it!</button>
+        </div>
+    </div>
+
     <!-- Footer -->
     <footer>
         <div class="container">
@@ -668,12 +799,13 @@
         const form = document.getElementById('emailForm');
         const emailInput = document.getElementById('emailInput');
         const formMessage = document.getElementById('formMessage');
+        const successModal = document.getElementById('successModal');
 
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
-            
+
             const email = emailInput.value.trim();
-            
+
             if (!email) {
                 showMessage('Please enter a valid email address.', 'error');
                 return;
@@ -691,8 +823,9 @@
                 const data = await response.json();
 
                 if (response.ok) {
-                    showMessage('Success! You\'re on the list. We\'ll be in touch soon.', 'success');
+                    // Show success modal instead of message
                     emailInput.value = '';
+                    showModal();
                 } else {
                     showMessage(data.error || 'Something went wrong. Please try again.', 'error');
                 }
@@ -705,13 +838,31 @@
         function showMessage(message, type) {
             formMessage.textContent = message;
             formMessage.className = `form-message ${type}`;
-            
-            if (type === 'success') {
-                setTimeout(() => {
-                    formMessage.style.display = 'none';
-                }, 5000);
-            }
         }
+
+        function showModal() {
+            successModal.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        }
+
+        function closeModal() {
+            successModal.classList.remove('active');
+            document.body.style.overflow = ''; // Restore scrolling
+        }
+
+        // Close modal when clicking outside
+        successModal.addEventListener('click', (e) => {
+            if (e.target === successModal) {
+                closeModal();
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && successModal.classList.contains('active')) {
+                closeModal();
+            }
+        });
     </script>
 </body>
 </html>

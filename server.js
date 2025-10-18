@@ -286,12 +286,12 @@ app.get('/api/analytics/detailed', requireAuth, (req, res) => {
         }
         
         // Also get overall stats
-        db.get('SELECT COUNT(*) as total, COUNT(DISTINCT ip) as unique FROM analytics', [], (err2, overall) => {
+        db.get('SELECT COUNT(*) as total, COUNT(DISTINCT ip) as uniqueVisitors FROM analytics', [], (err2, overall) => {
             if (err2) {
                 console.error('Database error:', err2);
                 return res.status(500).json({ error: 'Failed to fetch overall stats' });
             }
-            
+
             res.status(200).json({
                 overall: overall,
                 byDate: rows
@@ -303,6 +303,11 @@ app.get('/api/analytics/detailed', requireAuth, (req, res) => {
 // Serve the landing page
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
+// Serve the admin page
+app.get('/admn.html', (req, res) => {
+    res.sendFile(path.join(__dirname, 'admn.html'));
 });
 
 // Start server
