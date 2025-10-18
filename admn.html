@@ -602,9 +602,15 @@
             `;
 
             data.forEach(row => {
+                // Format date to be readable
+                const formattedDate = new Date(row.date).toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'short',
+                    day: 'numeric'
+                });
                 html += `
                     <tr>
-                        <td>${row.date}</td>
+                        <td>${formattedDate}</td>
                         <td>${row.visitsPerDay}</td>
                         <td>${row.uniqueVisitors}</td>
                     </tr>
