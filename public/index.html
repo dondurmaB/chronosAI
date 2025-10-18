@@ -28,10 +28,17 @@
         header {
             padding: 25px 0;
             background: #ffffff;
-            position: sticky;
+            position: fixed;
             top: 0;
+            left: 0;
+            right: 0;
             z-index: 100;
             border-bottom: 1px solid #f0f0f0;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        header.header-hidden {
+            transform: translateY(-100%);
         }
 
         .header-content {
@@ -532,6 +539,31 @@
             scroll-behavior: smooth;
         }
 
+        /* Scroll animations */
+        .scroll-animate {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .scroll-animate.animate-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Stagger animation delays for multiple elements */
+        .scroll-animate:nth-child(1) {
+            transition-delay: 0.1s;
+        }
+
+        .scroll-animate:nth-child(2) {
+            transition-delay: 0.2s;
+        }
+
+        .scroll-animate:nth-child(3) {
+            transition-delay: 0.3s;
+        }
+
         /* Social Proof */
         .social-proof {
             padding: 80px 0;
@@ -712,6 +744,10 @@
                 padding: 20px 0;
             }
 
+            body {
+                padding-top: 75px;
+            }
+
             .logo-text {
                 font-size: 20px;
             }
@@ -786,11 +822,11 @@
     </section>
 
     <!-- Benefits Section -->
-    <section class="benefits" id="benefits">
+    <section class="benefits scroll-animate" id="benefits">
         <div class="container">
             <h2>Why ChronosAI?</h2>
             <div class="benefits-grid">
-                <div class="benefit-card">
+                <div class="benefit-card scroll-animate">
                     <div class="benefit-icon">
                         <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path d="M13 2L3 14h8l-1 8 10-12h-8l1-8z"/>
@@ -800,7 +836,7 @@
                     <p>Reduce scheduling time from 30-45 minutes to less than 5 minutes per day. Reclaim hours every week for meaningful work.</p>
                 </div>
 
-                <div class="benefit-card">
+                <div class="benefit-card scroll-animate">
                     <div class="benefit-icon">
                         <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
@@ -810,7 +846,7 @@
                     <p>AI automatically detects and syncs meetings from emails, LinkedIn, Zoom, and more. No more app-hopping or manual entry.</p>
                 </div>
 
-                <div class="benefit-card">
+                <div class="benefit-card scroll-animate">
                     <div class="benefit-icon">
                         <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path d="M12 2L2 7l10 5 10-5-10-5z"/>
@@ -826,9 +862,9 @@
     </section>
 
     <!-- Social Proof -->
-    <section class="social-proof">
+    <section class="social-proof scroll-animate">
         <div class="container">
-            <div class="proof-container">
+            <div class="proof-container scroll-animate">
                 <blockquote>
                     "Through extensive user research and interviews with busy professionals, we identified a critical gap in calendar management. Our findings validate the hypothesis that AI-powered cross-platform scheduling can increase productivity by up to 80% while significantly reducing cognitive load and scheduling conflicts."
                 </blockquote>
@@ -838,9 +874,9 @@
     </section>
 
     <!-- Email Sign Up Section -->
-    <section class="email-section" id="waitlist">
+    <section class="email-section scroll-animate" id="waitlist">
         <div class="container">
-            <div class="email-container">
+            <div class="email-container scroll-animate">
                 <h2>Join the Waitlist</h2>
                 <p>Be among the first to experience AI-powered scheduling. Get notified when we launch.</p>
                 <form class="email-form" id="emailForm">
@@ -948,6 +984,55 @@
             if (e.key === 'Escape' && successModal.classList.contains('active')) {
                 closeModal();
             }
+        });
+
+        // Header hide/show on scroll
+        let lastScrollTop = 0;
+        const header = document.querySelector('header');
+        const scrollThreshold = 100; // Start hiding after scrolling 100px
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+
+            // Don't hide header if we're at the top of the page
+            if (currentScroll <= scrollThreshold) {
+                header.classList.remove('header-hidden');
+                return;
+            }
+
+            // Scrolling down - hide header
+            if (currentScroll > lastScrollTop && currentScroll > scrollThreshold) {
+                header.classList.add('header-hidden');
+            }
+            // Scrolling up - show header
+            else if (currentScroll < lastScrollTop) {
+                header.classList.remove('header-hidden');
+            }
+
+            lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+        }, false);
+
+        // Scroll animations using Intersection Observer
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1 // Trigger when 10% of element is visible
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-in');
+                    // Don't unobserve so animation only happens once
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        // Observe all elements with scroll-animate class
+        document.addEventListener('DOMContentLoaded', () => {
+            const animateElements = document.querySelectorAll('.scroll-animate');
+            animateElements.forEach(el => observer.observe(el));
         });
     </script>
 </body>
