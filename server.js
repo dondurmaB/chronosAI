@@ -1,9 +1,17 @@
 const express = require('express');
-const { sql } = require('@vercel/postgres');
+const { createPool } = require('@vercel/postgres');
 const path = require('path');
 const cors = require('cors');
 const fs = require('fs').promises;
 require('dotenv').config();
+
+// Create connection pool
+const pool = createPool({
+  connectionString: process.env.POSTGRES_URL || process.env.STORAGE_POSTGRES_URL
+});
+
+// Create a sql template function from the pool
+const sql = pool.sql;
 
 const app = express();
 const PORT = process.env.PORT || 3000;
