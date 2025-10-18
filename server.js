@@ -1,5 +1,5 @@
 const express = require('express');
-const sqlite3 = require('sqlite3').verbose();
+const { sql } = require('@vercel/postgres');
 const path = require('path');
 const cors = require('cors');
 const fs = require('fs').promises;
@@ -21,7 +21,7 @@ app.use(async (req, res, next) => {
     if (req.path === '/' || req.path === '/index.html') {
         // Track in JSON file
         await trackVisitor(req);
-        
+
         // Track in database
         const visitorInfo = {
             ip: req.ip || req.connection.remoteAddress,
@@ -29,14 +29,15 @@ app.use(async (req, res, next) => {
             referer: req.headers['referer'] || 'direct',
             path: req.path
         };
-        
-        db.run(
-            'INSERT INTO analytics (ip, user_agent, referer, path) VALUES (?, ?, ?, ?)',
-            [visitorInfo.ip, visitorInfo.userAgent, visitorInfo.referer, visitorInfo.path],
-            (err) => {
-                if (err) console.error('Error saving analytics:', err);
-            }
-        );
+
+        try {
+            await sql`
+                INSERT INTO analytics (ip, user_agent, referer, path)
+                VALUES (${visitorInfo.ip}, ${visitorInfo.userAgent}, ${visitorInfo.referer}, ${visitorInfo.path})
+            `;
+        } catch (err) {
+            console.error('Error saving analytics:', err);
+        }
     }
     next();
 });
@@ -134,56 +135,46 @@ async function saveToJSON(email, id) {
     }
 }
 
-// Initialize SQLite database
-const db = new sqlite3.Database('./subscribers.db', async (err) => {
-    if (err) {
-        console.error('Error opening database:', err);
-    } else {
-        console.log('Connected to SQLite database');
-        
-        // Initialize JSON file
+// Initialize Postgres database tables
+async function initializeDatabase() {
+    try {
+        // Initialize JSON files
         await initializeJSONFile();
-        
-        // Initialize analytics file
         await initializeAnalyticsFile();
-        
+
         // Create subscribers table if it doesn't exist
-        db.run(`
+        await sql`
             CREATE TABLE IF NOT EXISTS subscribers (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                id SERIAL PRIMARY KEY,
                 email TEXT UNIQUE NOT NULL,
-                subscribed_at DATETIME DEFAULT CURRENT_TIMESTAMP
+                subscribed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
             )
-        `, (err) => {
-            if (err) {
-                console.error('Error creating table:', err);
-            } else {
-                console.log('Subscribers table ready');
-            }
-        });
-        
+        `;
+        console.log('Subscribers table ready');
+
         // Create analytics table
-        db.run(`
+        await sql`
             CREATE TABLE IF NOT EXISTS analytics (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
+                id SERIAL PRIMARY KEY,
+                timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                 ip TEXT,
                 user_agent TEXT,
                 referer TEXT,
                 path TEXT
             )
-        `, (err) => {
-            if (err) {
-                console.error('Error creating analytics table:', err);
-            } else {
-                console.log('Analytics table ready');
-            }
-        });
+        `;
+        console.log('Analytics table ready');
+        console.log('Connected to Postgres database');
+    } catch (err) {
+        console.error('Error initializing database:', err);
     }
-});
+}
+
+// Initialize database on startup
+initializeDatabase();
 
 // API endpoint to handle email subscriptions
-app.post('/api/subscribe', (req, res) => {
+app.post('/api/subscribe', async (req, res) => {
     const { email } = req.body;
 
     // Validate email
@@ -192,43 +183,47 @@ app.post('/api/subscribe', (req, res) => {
         return res.status(400).json({ error: 'Invalid email address' });
     }
 
-    // Insert email into database
-    const query = 'INSERT INTO subscribers (email) VALUES (?)';
-    
-    db.run(query, [email], async function(err) {
-        if (err) {
-            if (err.message.includes('UNIQUE constraint failed')) {
-                return res.status(409).json({ error: 'This email is already registered' });
-            }
-            console.error('Database error:', err);
-            return res.status(500).json({ error: 'Failed to save email' });
-        }
+    try {
+        // Insert email into database
+        const result = await sql`
+            INSERT INTO subscribers (email)
+            VALUES (${email})
+            RETURNING id
+        `;
 
-        const subscriberId = this.lastID;
+        const subscriberId = result[0].id;
         console.log(`New subscriber: ${email} (ID: ${subscriberId})`);
-        
+
         // Also save to JSON file
         await saveToJSON(email, subscriberId);
-        
-        res.status(200).json({ 
-            success: true, 
+
+        res.status(200).json({
+            success: true,
             message: 'Successfully subscribed',
-            id: subscriberId 
+            id: subscriberId
         });
-    });
+    } catch (err) {
+        if (err.message.includes('duplicate key') || err.message.includes('unique constraint')) {
+            return res.status(409).json({ error: 'This email is already registered' });
+        }
+        console.error('Database error:', err);
+        return res.status(500).json({ error: 'Failed to save email' });
+    }
 });
 
 // API endpoint to get all subscribers (admin use only - PROTECTED)
-app.get('/api/subscribers', requireAuth, (req, res) => {
-    const query = 'SELECT id, email, subscribed_at FROM subscribers ORDER BY subscribed_at DESC';
-    
-    db.all(query, [], (err, rows) => {
-        if (err) {
-            console.error('Database error:', err);
-            return res.status(500).json({ error: 'Failed to fetch subscribers' });
-        }
-        res.status(200).json({ subscribers: rows });
-    });
+app.get('/api/subscribers', requireAuth, async (req, res) => {
+    try {
+        const result = await sql`
+            SELECT id, email, subscribed_at
+            FROM subscribers
+            ORDER BY subscribed_at DESC
+        `;
+        res.status(200).json({ subscribers: result });
+    } catch (err) {
+        console.error('Database error:', err);
+        return res.status(500).json({ error: 'Failed to fetch subscribers' });
+    }
 });
 
 // API endpoint to get JSON file content (admin use only - PROTECTED)
@@ -249,17 +244,14 @@ app.get('/api/analytics', requireAuth, async (req, res) => {
         // Get data from JSON file
         const data = await fs.readFile('./analytics.json', 'utf8');
         const analytics = JSON.parse(data);
-        
+
         // Get total unique visitors from database
-        db.get('SELECT COUNT(DISTINCT ip) as uniqueVisitors FROM analytics', [], (err, row) => {
-            if (err) {
-                console.error('Database error:', err);
-                return res.status(500).json({ error: 'Failed to fetch analytics' });
-            }
-            
-            analytics.uniqueVisitors = row.uniqueVisitors;
-            res.status(200).json(analytics);
-        });
+        const result = await sql`
+            SELECT COUNT(DISTINCT ip) as unique_visitors FROM analytics
+        `;
+
+        analytics.uniqueVisitors = Number(result[0].unique_visitors) || 0;
+        res.status(200).json(analytics);
     } catch (error) {
         console.error('Error reading analytics:', error);
         res.status(500).json({ error: 'Failed to read analytics' });
@@ -267,37 +259,41 @@ app.get('/api/analytics', requireAuth, async (req, res) => {
 });
 
 // API endpoint to get detailed analytics from database (admin use only - PROTECTED)
-app.get('/api/analytics/detailed', requireAuth, (req, res) => {
-    const query = `
-        SELECT 
-            COUNT(*) as totalVisits,
-            COUNT(DISTINCT ip) as uniqueVisitors,
-            DATE(timestamp) as date,
-            COUNT(*) as visitsPerDay
-        FROM analytics
-        GROUP BY DATE(timestamp)
-        ORDER BY timestamp DESC
-    `;
-    
-    db.all(query, [], (err, rows) => {
-        if (err) {
-            console.error('Database error:', err);
-            return res.status(500).json({ error: 'Failed to fetch detailed analytics' });
-        }
-        
-        // Also get overall stats
-        db.get('SELECT COUNT(*) as total, COUNT(DISTINCT ip) as uniqueVisitors FROM analytics', [], (err2, overall) => {
-            if (err2) {
-                console.error('Database error:', err2);
-                return res.status(500).json({ error: 'Failed to fetch overall stats' });
-            }
+app.get('/api/analytics/detailed', requireAuth, async (req, res) => {
+    try {
+        // Get stats by date
+        const byDate = await sql`
+            SELECT
+                COUNT(*) as total_visits,
+                COUNT(DISTINCT ip) as unique_visitors,
+                DATE(timestamp) as date,
+                COUNT(*) as visits_per_day
+            FROM analytics
+            GROUP BY DATE(timestamp)
+            ORDER BY timestamp DESC
+        `;
 
-            res.status(200).json({
-                overall: overall,
-                byDate: rows
-            });
+        // Get overall stats
+        const overallResult = await sql`
+            SELECT
+                COUNT(*) as total,
+                COUNT(DISTINCT ip) as unique_visitors
+            FROM analytics
+        `;
+
+        const overall = {
+            total: Number(overallResult[0].total) || 0,
+            uniqueVisitors: Number(overallResult[0].unique_visitors) || 0
+        };
+
+        res.status(200).json({
+            overall: overall,
+            byDate: byDate
         });
-    });
+    } catch (err) {
+        console.error('Database error:', err);
+        return res.status(500).json({ error: 'Failed to fetch detailed analytics' });
+    }
 });
 
 // Serve the landing page
@@ -317,12 +313,6 @@ app.listen(PORT, () => {
 
 // Graceful shutdown
 process.on('SIGINT', () => {
-    db.close((err) => {
-        if (err) {
-            console.error('Error closing database:', err);
-        } else {
-            console.log('Database connection closed');
-        }
-        process.exit(0);
-    });
+    console.log('Shutting down gracefully...');
+    process.exit(0);
 });
