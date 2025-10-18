@@ -1,0 +1,27 @@
+{
+  "name": "chronosai-landing",
+  "version": "1.0.0",
+  "description": "Chronos.AI Landing Page with Email Subscription",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "keywords": [
+    "chronos",
+    "ai",
+    "scheduling",
+    "calendar"
+  ],
+  "author": "Chronos.AI",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "sqlite3": "^5.1.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}

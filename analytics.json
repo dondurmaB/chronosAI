@@ -1,0 +1,27 @@
+{
+  "totalVisits": 3,
+  "uniqueVisitors": 1,
+  "visits": [
+    {
+      "timestamp": "2025-10-18T08:27:20.425Z",
+      "ip": "::1",
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "referer": "direct",
+      "path": "/"
+    },
+    {
+      "timestamp": "2025-10-18T08:27:39.879Z",
+      "ip": "::1",
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "referer": "direct",
+      "path": "/"
+    },
+    {
+      "timestamp": "2025-10-18T08:31:26.230Z",
+      "ip": "::1",
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "referer": "direct",
+      "path": "/"
+    }
+  ]
+}
