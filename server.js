@@ -191,7 +191,7 @@ app.post('/api/subscribe', async (req, res) => {
             RETURNING id
         `;
 
-        const subscriberId = result[0].id;
+        const subscriberId = result.rows[0].id;
         console.log(`New subscriber: ${email} (ID: ${subscriberId})`);
 
         // Also save to JSON file
@@ -207,7 +207,8 @@ app.post('/api/subscribe', async (req, res) => {
             return res.status(409).json({ error: 'This email is already registered' });
         }
         console.error('Database error:', err);
-        return res.status(500).json({ error: 'Failed to save email' });
+        console.error('Error details:', err.message, err.code);
+        return res.status(500).json({ error: 'Failed to save email', details: err.message });
     }
 });
 
@@ -219,7 +220,7 @@ app.get('/api/subscribers', requireAuth, async (req, res) => {
             FROM subscribers
             ORDER BY subscribed_at DESC
         `;
-        res.status(200).json({ subscribers: result });
+        res.status(200).json({ subscribers: result.rows });
     } catch (err) {
         console.error('Database error:', err);
         return res.status(500).json({ error: 'Failed to fetch subscribers' });
@@ -250,7 +251,7 @@ app.get('/api/analytics', requireAuth, async (req, res) => {
             SELECT COUNT(DISTINCT ip) as unique_visitors FROM analytics
         `;
 
-        analytics.uniqueVisitors = Number(result[0].unique_visitors) || 0;
+        analytics.uniqueVisitors = Number(result.rows[0]?.unique_visitors) || 0;
         res.status(200).json(analytics);
     } catch (error) {
         console.error('Error reading analytics:', error);
@@ -282,13 +283,13 @@ app.get('/api/analytics/detailed', requireAuth, async (req, res) => {
         `;
 
         const overall = {
-            total: Number(overallResult[0].total) || 0,
-            uniqueVisitors: Number(overallResult[0].unique_visitors) || 0
+            total: Number(overallResult.rows[0]?.total) || 0,
+            uniqueVisitors: Number(overallResult.rows[0]?.unique_visitors) || 0
         };
 
         res.status(200).json({
             overall: overall,
-            byDate: byDate
+            byDate: byDate.rows
         });
     } catch (err) {
         console.error('Database error:', err);
