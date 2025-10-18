@@ -413,7 +413,9 @@
         function renderCharts(analyticsData, subscribersData) {
             // Prepare data - sort by date ascending
             const sortedData = [...analyticsData].reverse();
-            // Format dates to show only the date part (YYYY-MM-DD)
+            // Keep raw dates for processing
+            const rawDates = sortedData.map(row => row.date);
+            // Format dates for display
             const dates = sortedData.map(row => {
                 const date = new Date(row.date);
                 return date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
@@ -511,14 +513,14 @@
             // Process subscriber data by date
             const subscribersByDate = {};
             subscribersData.forEach(sub => {
-                const date = sub.subscribed_at.split('T')[0]; // Get date part only
+                const date = sub.subscribed_at.split('T')[0]; // Get date part only (YYYY-MM-DD)
                 subscribersByDate[date] = (subscribersByDate[date] || 0) + 1;
             });
 
-            // Create cumulative subscriber count
+            // Create cumulative subscriber count using raw dates
             let cumulativeSubscribers = 0;
-            const subscribersOverTime = dates.map(date => {
-                const dateStr = new Date(date).toISOString().split('T')[0];
+            const subscribersOverTime = rawDates.map(rawDate => {
+                const dateStr = rawDate.split('T')[0]; // Get YYYY-MM-DD from raw date
                 const dailyCount = subscribersByDate[dateStr] || 0;
                 cumulativeSubscribers += dailyCount;
                 return cumulativeSubscribers;
