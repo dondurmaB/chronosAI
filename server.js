@@ -276,7 +276,7 @@ app.get('/api/analytics/detailed', requireAuth, async (req, res) => {
                 COUNT(*) as visits_per_day
             FROM analytics
             GROUP BY DATE(timestamp)
-            ORDER BY timestamp DESC
+            ORDER BY DATE(timestamp) DESC
         `;
 
         // Get overall stats
