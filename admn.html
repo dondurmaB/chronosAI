@@ -262,6 +262,12 @@
                         <canvas id="uniqueVisitorsChart"></canvas>
                     </div>
                 </div>
+                <div class="chart-card">
+                    <h3>Email Subscribers Over Time</h3>
+                    <div class="chart-container">
+                        <canvas id="subscribersChart"></canvas>
+                    </div>
+                </div>
             </div>
 
             <!-- Subscribers Section -->
@@ -392,7 +398,7 @@
                 displayAnalytics(analyticsData.byDate);
 
                 // Render charts
-                renderCharts(analyticsData.byDate);
+                renderCharts(analyticsData.byDate, subsData.subscribers);
 
             } catch (error) {
                 console.error('Error loading dashboard data:', error);
@@ -402,8 +408,9 @@
         let dailyVisitsChartInstance = null;
         let totalVisitsChartInstance = null;
         let uniqueVisitorsChartInstance = null;
+        let subscribersChartInstance = null;
 
-        function renderCharts(analyticsData) {
+        function renderCharts(analyticsData, subscribersData) {
             // Prepare data - sort by date ascending
             const sortedData = [...analyticsData].reverse();
             const dates = sortedData.map(row => row.date);
@@ -443,6 +450,7 @@
             if (dailyVisitsChartInstance) dailyVisitsChartInstance.destroy();
             if (totalVisitsChartInstance) totalVisitsChartInstance.destroy();
             if (uniqueVisitorsChartInstance) uniqueVisitorsChartInstance.destroy();
+            if (subscribersChartInstance) subscribersChartInstance.destroy();
 
             // Chart 1: Daily Visits
             const dailyCtx = document.getElementById('dailyVisitsChart').getContext('2d');
@@ -489,6 +497,39 @@
                         data: uniqueVisitors,
                         borderColor: '#f59e0b',
                         backgroundColor: 'rgba(245, 158, 11, 0.1)',
+                        fill: true,
+                        tension: 0.4
+                    }]
+                }
+            });
+
+            // Chart 4: Email Subscribers Over Time
+            // Process subscriber data by date
+            const subscribersByDate = {};
+            subscribersData.forEach(sub => {
+                const date = sub.subscribed_at.split('T')[0]; // Get date part only
+                subscribersByDate[date] = (subscribersByDate[date] || 0) + 1;
+            });
+
+            // Create cumulative subscriber count
+            let cumulativeSubscribers = 0;
+            const subscribersOverTime = dates.map(date => {
+                const dateStr = new Date(date).toISOString().split('T')[0];
+                const dailyCount = subscribersByDate[dateStr] || 0;
+                cumulativeSubscribers += dailyCount;
+                return cumulativeSubscribers;
+            });
+
+            const subscribersCtx = document.getElementById('subscribersChart').getContext('2d');
+            subscribersChartInstance = new Chart(subscribersCtx, {
+                ...chartConfig,
+                data: {
+                    labels: dates,
+                    datasets: [{
+                        label: 'Email Subscribers',
+                        data: subscribersOverTime,
+                        borderColor: '#ec4899',
+                        backgroundColor: 'rgba(236, 72, 153, 0.1)',
                         fill: true,
                         tension: 0.4
                     }]
