@@ -306,7 +306,9 @@ app.get('/api/analytics/detailed', requireAuth, async (req, res) => {
         });
     } catch (err) {
         console.error('Database error:', err);
-        return res.status(500).json({ error: 'Failed to fetch detailed analytics' });
+        console.error('Error message:', err.message);
+        console.error('Error stack:', err.stack);
+        return res.status(500).json({ error: 'Failed to fetch detailed analytics', details: err.message });
     }
 });
 
