@@ -242,16 +242,21 @@ app.get('/api/subscribers/json', requireAuth, async (req, res) => {
 // API endpoint to get analytics (admin use only - PROTECTED)
 app.get('/api/analytics', requireAuth, async (req, res) => {
     try {
-        // Get data from JSON file
-        const data = await fs.readFile('./analytics.json', 'utf8');
-        const analytics = JSON.parse(data);
+        // Get analytics from database
+        const totalVisitsResult = await sql`
+            SELECT COUNT(*) as total FROM analytics
+        `;
 
-        // Get total unique visitors from database
-        const result = await sql`
+        const uniqueVisitorsResult = await sql`
             SELECT COUNT(DISTINCT ip) as unique_visitors FROM analytics
         `;
 
-        analytics.uniqueVisitors = Number(result.rows[0]?.unique_visitors) || 0;
+        const analytics = {
+            totalVisits: Number(totalVisitsResult.rows[0]?.total) || 0,
+            uniqueVisitors: Number(uniqueVisitorsResult.rows[0]?.unique_visitors) || 0,
+            visits: [] // Legacy field for compatibility
+        };
+
         res.status(200).json(analytics);
     } catch (error) {
         console.error('Error reading analytics:', error);
@@ -287,9 +292,17 @@ app.get('/api/analytics/detailed', requireAuth, async (req, res) => {
             uniqueVisitors: Number(overallResult.rows[0]?.unique_visitors) || 0
         };
 
+        // Transform snake_case to camelCase for frontend
+        const byDateFormatted = byDate.rows.map(row => ({
+            date: row.date,
+            totalVisits: Number(row.total_visits),
+            uniqueVisitors: Number(row.unique_visitors),
+            visitsPerDay: Number(row.visits_per_day)
+        }));
+
         res.status(200).json({
             overall: overall,
-            byDate: byDate.rows
+            byDate: byDateFormatted
         });
     } catch (err) {
         console.error('Database error:', err);
