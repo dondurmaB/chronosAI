@@ -486,4 +486,4 @@ For questions or issues, please contact your development team.
 
 ---
 
-Built with ❤️ for busy professionals who deserve better scheduling.
+Built with ❤️ for busy professionals who deserve better scheduling.# chronosAI
