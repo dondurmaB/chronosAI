@@ -88,6 +88,12 @@
             background-clip: text;
         }
 
+        .logo-image {
+            height: 50px;
+            width: auto;
+            display: block;
+        }
+
         .nav-buttons {
             display: flex;
             gap: 15px;
@@ -757,6 +763,10 @@
                 height: 36px;
             }
 
+            .logo-image {
+                height: 40px;
+            }
+
             .tagline {
                 font-size: 12px;
                 margin-bottom: 20px;
@@ -774,13 +784,7 @@
         <div class="container">
             <div class="header-content">
                 <a href="/" class="logo" onclick="window.location.href = window.location.pathname; return false;">
-                    <div class="logo-icon">
-                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <circle cx="12" cy="12" r="10"/>
-                            <polyline points="12 6 12 12 16 14"/>
-                        </svg>
-                    </div>
-                    <div class="logo-text">ChronosAI</div>
+                    <img src="logo_img.jpg" alt="ChronosAI Logo" class="logo-image">
                 </a>
                 <div class="nav-buttons">
                     <a href="#benefits" class="btn-secondary">Learn More</a>
