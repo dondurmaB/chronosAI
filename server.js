@@ -1,17 +1,9 @@
 const express = require('express');
-const { createClient } = require('@vercel/postgres');
+const { sql } = require('@vercel/postgres');
 const path = require('path');
 const cors = require('cors');
 const fs = require('fs').promises;
 require('dotenv').config();
-
-// Create Postgres client
-const client = createClient({
-  connectionString: process.env.POSTGRES_URL || process.env.STORAGE_POSTGRES_URL
-});
-
-// Create a sql template function
-const sql = client.sql;
 
 const app = express();
 const PORT = process.env.PORT || 3000;
