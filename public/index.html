@@ -656,20 +656,21 @@
             .video-container {
                 max-width: 100%;
                 border-radius: 16px;
-                max-height: 500px;
-                overflow: hidden;
+                overflow: visible;
                 position: relative;
             }
 
-            .video-container::after {
+            .video-container::before {
                 content: '';
                 position: absolute;
-                bottom: 0;
+                top: 0;
                 left: 0;
                 right: 0;
                 height: 120px;
-                background: linear-gradient(to bottom, transparent 0%, #faf5ff 100%);
+                background: linear-gradient(to bottom, #faf5ff 0%, transparent 100%);
                 pointer-events: none;
+                z-index: 1;
+                border-radius: 16px 16px 0 0;
             }
 
             .demo-image {
