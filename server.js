@@ -15,6 +15,22 @@ const ADMIN_TOKEN = process.env.ADMIN_TOKEN || 'your-secret-admin-token-change-t
 app.use(cors());
 app.use(express.json());
 
+// Helper function to get real client IP
+function getClientIP(req) {
+    // Check various headers that proxies set
+    const forwarded = req.headers['x-forwarded-for'];
+    if (forwarded) {
+        // x-forwarded-for can contain multiple IPs, take the first one (original client)
+        return forwarded.split(',')[0].trim();
+    }
+
+    // Fallback to other headers
+    return req.headers['x-real-ip'] ||
+           req.connection.remoteAddress ||
+           req.socket.remoteAddress ||
+           req.ip;
+}
+
 // Track all page visits (middleware)
 app.use(async (req, res, next) => {
     // Only track actual page visits, not API calls or static assets
@@ -24,7 +40,7 @@ app.use(async (req, res, next) => {
 
         // Track in database
         const visitorInfo = {
-            ip: req.ip || req.connection.remoteAddress,
+            ip: getClientIP(req),
             userAgent: req.headers['user-agent'],
             referer: req.headers['referer'] || 'direct',
             path: req.path
@@ -91,22 +107,22 @@ async function trackVisitor(req) {
     try {
         const data = await fs.readFile('./analytics.json', 'utf8');
         const analytics = JSON.parse(data);
-        
+
         const visitorInfo = {
             timestamp: new Date().toISOString(),
-            ip: req.ip || req.connection.remoteAddress,
+            ip: getClientIP(req),
             userAgent: req.headers['user-agent'],
             referer: req.headers['referer'] || 'direct',
             path: req.path
         };
-        
+
         analytics.totalVisits++;
         analytics.visits.push(visitorInfo);
-        
+
         // Count unique visitors by IP (simple approach)
         const uniqueIPs = new Set(analytics.visits.map(v => v.ip));
         analytics.uniqueVisitors = uniqueIPs.size;
-        
+
         await fs.writeFile('./analytics.json', JSON.stringify(analytics, null, 2));
     } catch (error) {
         console.error('Error tracking visitor:', error);
