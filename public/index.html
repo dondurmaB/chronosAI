@@ -584,49 +584,71 @@
         /* Testimonials Carousel */
         .testimonials {
             padding: 100px 0;
-            background: #fafafa;
+            background: linear-gradient(135deg, #faf5ff 0%, #f5f3ff 100%);
             overflow: hidden;
         }
 
         .testimonials h2 {
             text-align: center;
             font-size: 46px;
-            margin-bottom: 60px;
+            margin-bottom: 70px;
             color: #1a1a1a;
         }
 
         .testimonials-carousel {
             position: relative;
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 0 60px;
+            padding: 0 80px;
+        }
+
+        .testimonials-wrapper {
+            overflow: visible;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 350px;
         }
 
         .testimonials-track {
             display: flex;
-            gap: 30px;
-            transition: transform 0.5s ease-in-out;
-        }
-
-        .testimonials-wrapper {
-            overflow: hidden;
+            align-items: center;
+            justify-content: center;
+            gap: 40px;
+            position: relative;
+            width: 100%;
         }
 
         .testimonial-card {
             background: white;
-            padding: 35px;
-            border-radius: 12px;
+            padding: 40px;
+            border-radius: 16px;
             border: 1px solid #e5e7eb;
-            min-width: calc(33.333% - 20px);
+            width: 400px;
             flex-shrink: 0;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-            transition: all 0.3s;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0.4;
+            transform: scale(0.85);
+            position: absolute;
         }
 
-        .testimonial-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(139, 92, 246, 0.15);
-            border-color: rgba(139, 92, 246, 0.3);
+        .testimonial-card.center {
+            opacity: 1;
+            transform: scale(1);
+            z-index: 2;
+            box-shadow: 0 10px 40px rgba(139, 92, 246, 0.2);
+            border-color: rgba(139, 92, 246, 0.2);
+        }
+
+        .testimonial-card.left {
+            left: 0;
+            z-index: 1;
+        }
+
+        .testimonial-card.right {
+            right: 0;
+            z-index: 1;
         }
 
         .testimonial-text {
@@ -841,12 +863,22 @@
             }
 
             .testimonials-carousel {
-                padding: 0 20px;
+                padding: 0 50px;
+            }
+
+            .testimonials-wrapper {
+                min-height: 280px;
             }
 
             .testimonial-card {
-                min-width: 100%;
-                padding: 25px;
+                width: 90%;
+                max-width: 350px;
+                padding: 30px;
+            }
+
+            .testimonial-card.left,
+            .testimonial-card.right {
+                display: none;
             }
 
             .carousel-nav {
@@ -860,11 +892,11 @@
             }
 
             .carousel-nav.prev {
-                left: -5px;
+                left: 5px;
             }
 
             .carousel-nav.next {
-                right: -5px;
+                right: 5px;
             }
 
             .cta-buttons {
@@ -1240,74 +1272,93 @@
             animateElements.forEach(el => observer.observe(el));
         });
 
-        // Testimonials Carousel
-        let currentIndex = 0;
-        const track = document.getElementById('testimonialsTrack');
-        const cards = document.querySelectorAll('.testimonial-card');
-        const totalCards = cards.length;
-        const cardsPerView = window.innerWidth <= 768 ? 1 : 3;
-        const totalSlides = Math.ceil(totalCards / cardsPerView);
-        let autoRotateInterval;
+        // Testimonials Carousel - Center-focused design
+        let currentTestimonial = 0;
+        const testimonialCards = document.querySelectorAll('.testimonial-card');
+        const totalTestimonials = testimonialCards.length;
+        let testimonialInterval;
 
-        // Create dots
+        // Create dots for each testimonial
         const dotsContainer = document.getElementById('carouselDots');
-        for (let i = 0; i < totalSlides; i++) {
+        for (let i = 0; i < totalTestimonials; i++) {
             const dot = document.createElement('div');
             dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
-            dot.onclick = () => goToSlide(i);
+            dot.onclick = () => goToTestimonial(i);
             dotsContainer.appendChild(dot);
         }
 
-        function updateCarousel() {
-            const cardWidth = cards[0].offsetWidth;
-            const gap = 30;
-            const offset = currentIndex * cardsPerView * (cardWidth + gap);
-            track.style.transform = `translateX(-${offset}px)`;
+        function updateTestimonialCarousel() {
+            testimonialCards.forEach((card, index) => {
+                // Remove all position classes
+                card.classList.remove('center', 'left', 'right');
+                card.style.display = 'none';
+
+                // Determine position relative to current
+                if (index === currentTestimonial) {
+                    card.classList.add('center');
+                    card.style.display = 'block';
+                    card.style.position = 'relative';
+                    card.style.left = 'auto';
+                    card.style.right = 'auto';
+                } else if (index === (currentTestimonial - 1 + totalTestimonials) % totalTestimonials) {
+                    // Left card
+                    if (window.innerWidth > 768) {
+                        card.classList.add('left');
+                        card.style.display = 'block';
+                    }
+                } else if (index === (currentTestimonial + 1) % totalTestimonials) {
+                    // Right card
+                    if (window.innerWidth > 768) {
+                        card.classList.add('right');
+                        card.style.display = 'block';
+                    }
+                }
+            });
 
             // Update dots
             document.querySelectorAll('.carousel-dot').forEach((dot, index) => {
-                dot.classList.toggle('active', index === currentIndex);
+                dot.classList.toggle('active', index === currentTestimonial);
             });
         }
 
         function moveCarousel(direction) {
-            currentIndex += direction;
+            currentTestimonial += direction;
 
             // Loop around
-            if (currentIndex < 0) {
-                currentIndex = totalSlides - 1;
-            } else if (currentIndex >= totalSlides) {
-                currentIndex = 0;
+            if (currentTestimonial < 0) {
+                currentTestimonial = totalTestimonials - 1;
+            } else if (currentTestimonial >= totalTestimonials) {
+                currentTestimonial = 0;
             }
 
-            updateCarousel();
-            resetAutoRotate();
+            updateTestimonialCarousel();
+            resetTestimonialAutoRotate();
         }
 
-        function goToSlide(index) {
-            currentIndex = index;
-            updateCarousel();
-            resetAutoRotate();
+        function goToTestimonial(index) {
+            currentTestimonial = index;
+            updateTestimonialCarousel();
+            resetTestimonialAutoRotate();
         }
 
-        function resetAutoRotate() {
-            clearInterval(autoRotateInterval);
-            startAutoRotate();
+        function resetTestimonialAutoRotate() {
+            clearInterval(testimonialInterval);
+            startTestimonialAutoRotate();
         }
 
-        function startAutoRotate() {
-            autoRotateInterval = setInterval(() => {
+        function startTestimonialAutoRotate() {
+            testimonialInterval = setInterval(() => {
                 moveCarousel(1);
             }, 5000); // Auto-rotate every 5 seconds
         }
 
-        // Initialize carousel
-        updateCarousel();
-        startAutoRotate();
+        // Initialize
+        updateTestimonialCarousel();
+        startTestimonialAutoRotate();
 
         // Handle window resize
         window.addEventListener('resize', () => {
-            updateCarousel();
+            updateTestimonialCarousel();
         });
     </script>
 </body>
