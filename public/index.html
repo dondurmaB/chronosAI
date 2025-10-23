@@ -616,6 +616,7 @@
             gap: 30px;
             transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
             padding: 50px 0;
+            width: max-content;
         }
 
         .testimonial-card {
@@ -631,13 +632,13 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            position: relative;
         }
 
         /* Different states based on position */
         .testimonial-card[data-position="center"] {
             opacity: 1;
             transform: scale(1);
-            z-index: 5;
             box-shadow: 0 10px 40px rgba(139, 92, 246, 0.25);
             border-color: rgba(139, 92, 246, 0.3);
         }
@@ -645,19 +646,16 @@
         .testimonial-card[data-position="adjacent"] {
             opacity: 0.6;
             transform: scale(0.85);
-            z-index: 3;
         }
 
         .testimonial-card[data-position="far"] {
             opacity: 0.3;
             transform: scale(0.7);
-            z-index: 1;
         }
 
         .testimonial-card[data-position="hidden"] {
             opacity: 0;
             transform: scale(0.6);
-            z-index: 0;
         }
 
         .testimonial-text {
@@ -1293,8 +1291,8 @@
             animateElements.forEach(el => observer.observe(el));
         });
 
-        // Testimonials Carousel - 5-card belt animation
-        let currentIndex = 0;
+        // Testimonials Carousel - 5-card smooth belt animation
+        let currentIndex = 2; // Start at index 2 to show cards on both sides
         const track = document.getElementById('testimonialsTrack');
         const testimonialCards = document.querySelectorAll('.testimonial-card');
         const totalTestimonials = testimonialCards.length;
@@ -1304,23 +1302,22 @@
         const dotsContainer = document.getElementById('carouselDots');
         for (let i = 0; i < totalTestimonials; i++) {
             const dot = document.createElement('div');
-            dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+            dot.className = 'carousel-dot' + (i === 2 ? ' active' : '');
             dot.onclick = () => goToSlide(i);
             dotsContainer.appendChild(dot);
         }
 
         function updateCarousel() {
-            // Calculate offset to center the current card
-            const cardWidth = 380; // Fixed card width
+            const cardWidth = 380;
             const gap = 30;
-            const containerCenter = track.parentElement.offsetWidth / 2;
-            const cardCenter = cardWidth / 2;
+            const containerWidth = track.parentElement.offsetWidth;
+            const centerOffset = (containerWidth / 2) - (cardWidth / 2);
 
-            // Offset to center the current card
-            const offset = (currentIndex * (cardWidth + gap)) - containerCenter + cardCenter + (cardWidth + gap) * 2;
-            track.style.transform = `translateX(-${offset}px)`;
+            // Calculate how much to move the track to center the current card
+            const moveAmount = (currentIndex * (cardWidth + gap)) - centerOffset;
+            track.style.transform = `translateX(-${moveAmount}px)`;
 
-            // Update card positions and styles
+            // Update card states based on distance from center
             testimonialCards.forEach((card, index) => {
                 const distance = Math.abs(index - currentIndex);
 
@@ -1335,7 +1332,7 @@
                 }
             });
 
-            // Update dots
+            // Update active dot
             document.querySelectorAll('.carousel-dot').forEach((dot, index) => {
                 dot.classList.toggle('active', index === currentIndex);
             });
@@ -1372,11 +1369,9 @@
             }, 5000);
         }
 
-        // Initialize - start with offset to show 5 cards
-        setTimeout(() => {
-            updateCarousel();
-            startAutoRotate();
-        }, 100);
+        // Initialize
+        updateCarousel();
+        startAutoRotate();
 
         // Handle resize
         window.addEventListener('resize', updateCarousel);
