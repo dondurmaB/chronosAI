@@ -325,6 +325,17 @@
             box-shadow: 0 8px 20px rgba(139, 92, 246, 0.4);
         }
 
+        .feedback-button-container {
+            display: flex;
+            justify-content: center;
+            margin: 0 auto;
+        }
+
+        .feedback-button {
+            text-decoration: none;
+            display: inline-block;
+        }
+
         .form-message {
             margin-top: 16px;
             padding: 12px;
@@ -788,7 +799,7 @@
                 </a>
                 <div class="nav-buttons">
                     <a href="#benefits" class="btn-secondary">Learn More</a>
-                    <a href="#waitlist" class="btn-primary">Sign Up</a>
+                    <a href="#feedback" class="btn-primary">Feedback</a>
                 </div>
             </div>
         </div>
@@ -811,7 +822,7 @@
                     <h1>Your AI Secretary for <span class="gradient-text">Effortless Scheduling</span></h1>
                     <p class="subheadline">Stop juggling multiple calendars. Let AI automatically sync your meetings across Google and Outlook—so you can focus on what matters.</p>
                     <div class="cta-buttons">
-                        <a href="#waitlist" class="btn-large primary">Get Early Access</a>
+                        <a href="https://chromewebstore.google.com/detail/chronos-natural-calendar/ihalkpnnopcnekipklcpkmbocolbfhne?authuser=0&hl=en" target="_blank" rel="noopener noreferrer" class="btn-large primary">Try ChronosAI Now</a>
                     </div>
                 </div>
 
@@ -877,23 +888,15 @@
         </div>
     </section>
 
-    <!-- Email Sign Up Section -->
-    <section class="email-section scroll-animate" id="waitlist">
+    <!-- Feedback Section -->
+    <section class="email-section scroll-animate" id="feedback">
         <div class="container">
             <div class="email-container scroll-animate">
-                <h2>Join the Waitlist</h2>
-                <p>Be among the first to experience AI-powered scheduling. Get notified when we launch.</p>
-                <form class="email-form" id="emailForm">
-                    <input
-                        type="email"
-                        class="email-input"
-                        placeholder="Enter your email address"
-                        required
-                        id="emailInput"
-                    >
-                    <button type="submit" class="email-button">Get Early Access</button>
-                </form>
-                <div class="form-message" id="formMessage"></div>
+                <h2>Share Your Feedback</h2>
+                <p>Help us improve ChronosAI. Tell us about your experience and suggestions.</p>
+                <div class="feedback-button-container">
+                    <a href="mailto:chronosai.feedback@gmail.com" class="email-button feedback-button">Send Feedback</a>
+                </div>
             </div>
         </div>
     </section>
