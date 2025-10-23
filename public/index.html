@@ -581,34 +581,65 @@
             transition-delay: 0.3s;
         }
 
-        /* Social Proof */
-        .social-proof {
-            padding: 80px 0;
-            background: white;
+        /* Testimonials */
+        .testimonials {
+            padding: 100px 0;
+            background: #fafafa;
         }
 
-        .proof-container {
-            max-width: 850px;
-            margin: 0 auto;
+        .testimonials h2 {
             text-align: center;
-            padding: 60px 50px;
-            background: linear-gradient(135deg, #faf5ff 0%, #f5f3ff 100%);
-            border-radius: 20px;
-            border: 1px solid rgba(139, 92, 246, 0.1);
-        }
-
-        .proof-container blockquote {
-            font-size: 20px;
+            font-size: 46px;
+            margin-bottom: 60px;
             color: #1a1a1a;
-            font-style: italic;
-            line-height: 1.8;
-            margin-bottom: 20px;
         }
 
-        .proof-source {
-            color: #8b5cf6;
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .testimonial-card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid #e5e7eb;
+            transition: all 0.3s;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(139, 92, 246, 0.1);
+            border-color: rgba(139, 92, 246, 0.2);
+        }
+
+        .testimonial-text {
+            font-size: 15px;
+            line-height: 1.7;
+            color: #374151;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .testimonial-author strong {
+            font-size: 15px;
+            color: #1a1a1a;
             font-weight: 600;
-            font-size: 16px;
+        }
+
+        .testimonial-author span {
+            font-size: 14px;
+            color: #8b5cf6;
+            font-weight: 500;
         }
 
         /* Footer */
@@ -722,17 +753,22 @@
                 padding: 35px 28px;
             }
 
-            .social-proof {
-                padding: 60px 0;
+            .testimonials {
+                padding: 70px 0;
             }
 
-            .proof-container {
-                padding: 40px 30px;
+            .testimonials h2 {
+                font-size: 32px;
+                margin-bottom: 40px;
             }
 
-            .proof-container blockquote {
-                font-size: 17px;
-                line-height: 1.7;
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .testimonial-card {
+                padding: 25px;
             }
 
             .cta-buttons {
@@ -876,14 +912,130 @@
         </div>
     </section>
 
-    <!-- Social Proof -->
-    <section class="social-proof scroll-animate">
+    <!-- Testimonials -->
+    <section class="testimonials scroll-animate">
         <div class="container">
-            <div class="proof-container scroll-animate">
-                <blockquote>
-                    "Through extensive user research and interviews with busy professionals, we identified a critical gap in calendar management. Our findings validate the hypothesis that AI-powered cross-platform scheduling can increase productivity by up to 80% while significantly reducing cognitive load and scheduling conflicts."
-                </blockquote>
-                <div class="proof-source">— ChronosAI Research Team</div>
+            <h2>What Our Users Say</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial-card scroll-animate">
+                    <p class="testimonial-text">"I'm a high school teacher juggling classes, meetings, and parent calls. ChronosAI keeps my schedule clean without me doing anything. It's like magic."</p>
+                    <div class="testimonial-author">
+                        <strong>Laura P.</strong>
+                        <span>Teacher</span>
+                    </div>
+                </div>
+
+                <div class="testimonial-card scroll-animate">
+                    <p class="testimonial-text">"I manage multiple job interviews daily. ChronosAI automatically adds everything from emails and messages — I barely touch my calendar anymore."</p>
+                    <div class="testimonial-author">
+                        <strong>Ethan R.</strong>
+                        <span>HR Coordinator</span>
+                    </div>
+                </div>
+
+                <div class="testimonial-card scroll-animate">
+                    <p class="testimonial-text">"As a small business owner, I wear too many hats. ChronosAI saves me from forgetting meetings with clients or vendors. Honestly, it feels like a lifesaver."</p>
+                    <div class="testimonial-author">
+                        <strong>Maria S.</strong>
+                        <span>Café Owner</span>
+                    </div>
+                </div>
+
+                <div class="testimonial-card scroll-animate">
+                    <p class="testimonial-text">"I'm not tech-savvy, but this was simple. Connected my calendars once, and ChronosAI just… handled the rest."</p>
+                    <div class="testimonial-author">
+                        <strong>Robert L.</strong>
+                        <span>Office Administrator</span>
+                    </div>
+                </div>
+
+                <div class="testimonial-card scroll-animate">
+                    <p class="testimonial-text">"I freelance for several clients and used to double-book all the time. Since using ChronosAI, that problem's gone completely."</p>
+                    <div class="testimonial-author">
+                        <strong>Kayla J.</strong>
+                        <span>Graphic Designer</span>
+                    </div>
+                </div>
+
+                <div class="testimonial-card scroll-animate">
+                    <p class="testimonial-text">"I used to copy meeting links from emails to my calendar manually. ChronosAI now does that before I even open the email. Unreal."</p>
+                    <div class="testimonial-author">
+                        <strong>Steven D.</strong>
+                        <span>Marketing Assistant</span>
+                    </div>
+                </div>
+
+                <div class="testimonial-card scroll-animate">
+                    <p class="testimonial-text">"Between my kids' schedules and my full-time job, I was drowning in reminders. ChronosAI helped me take control of my week again."</p>
+                    <div class="testimonial-author">
+                        <strong>Angela T.</strong>
+                        <span>Working Parent</span>
+                    </div>
+                </div>
+
+                <div class="testimonial-card scroll-animate">
+                    <p class="testimonial-text">"ChronosAI finds meetings in my messages before I even remember agreeing to them. It's spooky how well it works — but in a good way."</p>
+                    <div class="testimonial-author">
+                        <strong>Brian K.</strong>
+                        <span>Real Estate Agent</span>
+                    </div>
+                </div>
+
+                <div class="testimonial-card scroll-animate">
+                    <p class="testimonial-text">"I run a tutoring center, and scheduling used to be chaos. Now my calendars sync perfectly. I've stopped missing sessions."</p>
+                    <div class="testimonial-author">
+                        <strong>Hannah F.</strong>
+                        <span>Education Manager</span>
+                    </div>
+                </div>
+
+                <div class="testimonial-card scroll-animate">
+                    <p class="testimonial-text">"I tried it out of curiosity — and kept it because I realized I gained nearly half an hour of my day back."</p>
+                    <div class="testimonial-author">
+                        <strong>Tom C.</strong>
+                        <span>Software Developer</span>
+                    </div>
+                </div>
+
+                <div class="testimonial-card scroll-animate">
+                    <p class="testimonial-text">"ChronosAI's smart suggestions are ridiculously good. It knows when I prefer to have meetings, even before I do."</p>
+                    <div class="testimonial-author">
+                        <strong>Isha M.</strong>
+                        <span>Project Coordinator</span>
+                    </div>
+                </div>
+
+                <div class="testimonial-card scroll-animate">
+                    <p class="testimonial-text">"I'm constantly switching between Outlook for work and Google Calendar for personal stuff. ChronosAI keeps them in perfect sync — I can't live without it now."</p>
+                    <div class="testimonial-author">
+                        <strong>David P.</strong>
+                        <span>Customer Support Lead</span>
+                    </div>
+                </div>
+
+                <div class="testimonial-card scroll-animate">
+                    <p class="testimonial-text">"I'm a university lecturer. ChronosAI automatically added my classes, department meetings, and student calls. It's like having a teaching assistant for scheduling."</p>
+                    <div class="testimonial-author">
+                        <strong>Dr. Mei L.</strong>
+                        <span>Lecturer</span>
+                    </div>
+                </div>
+
+                <div class="testimonial-card scroll-animate">
+                    <p class="testimonial-text">"I used to think my disorganized schedule was just part of being busy. ChronosAI changed that — it's the calm in my chaos."</p>
+                    <div class="testimonial-author">
+                        <strong>Liam S.</strong>
+                        <span>Logistics Supervisor</span>
+                    </div>
+                </div>
+
+                <div class="testimonial-card scroll-animate">
+                    <p class="testimonial-text">"I've never left a review before, but this deserves one. ChronosAI keeps my week under control so I can actually focus on my work."</p>
+                    <div class="testimonial-author">
+                        <strong>Fatima N.</strong>
+                        <span>Administrative Staff</span>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
