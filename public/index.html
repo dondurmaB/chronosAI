@@ -597,26 +597,27 @@
 
         .testimonials-carousel {
             position: relative;
-            max-width: 1400px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 0 80px;
         }
 
         .testimonials-wrapper {
-            overflow: hidden;
+            overflow: visible;
             position: relative;
             min-height: 400px;
             display: flex;
             align-items: center;
+            justify-content: center;
         }
 
         .testimonials-track {
             display: flex;
             align-items: center;
-            gap: 30px;
-            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-            padding: 50px 0;
-            width: max-content;
+            justify-content: center;
+            position: relative;
+            width: 100%;
+            height: 350px;
         }
 
         .testimonial-card {
@@ -624,38 +625,55 @@
             padding: 40px;
             border-radius: 16px;
             border: 1px solid #e5e7eb;
-            width: 380px;
+            width: 420px;
             height: 280px;
-            flex-shrink: 0;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
             transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            position: relative;
+            position: absolute;
+            left: 50%;
         }
 
-        /* Different states based on position */
+        /* 5-card overlapping layout with z-index stacking */
         .testimonial-card[data-position="center"] {
             opacity: 1;
-            transform: scale(1);
-            box-shadow: 0 10px 40px rgba(139, 92, 246, 0.25);
+            transform: translateX(-50%) scale(1);
+            z-index: 50;
+            box-shadow: 0 15px 50px rgba(139, 92, 246, 0.3);
             border-color: rgba(139, 92, 246, 0.3);
         }
 
-        .testimonial-card[data-position="adjacent"] {
+        .testimonial-card[data-position="left-1"] {
             opacity: 0.6;
-            transform: scale(0.85);
+            transform: translateX(calc(-50% - 380px)) scale(0.85);
+            z-index: 40;
         }
 
-        .testimonial-card[data-position="far"] {
+        .testimonial-card[data-position="right-1"] {
+            opacity: 0.6;
+            transform: translateX(calc(-50% + 380px)) scale(0.85);
+            z-index: 40;
+        }
+
+        .testimonial-card[data-position="left-2"] {
             opacity: 0.3;
-            transform: scale(0.7);
+            transform: translateX(calc(-50% - 680px)) scale(0.7);
+            z-index: 30;
+        }
+
+        .testimonial-card[data-position="right-2"] {
+            opacity: 0.3;
+            transform: translateX(calc(-50% + 680px)) scale(0.7);
+            z-index: 30;
         }
 
         .testimonial-card[data-position="hidden"] {
             opacity: 0;
-            transform: scale(0.6);
+            transform: translateX(-50%) scale(0.5);
+            z-index: 0;
+            pointer-events: none;
         }
 
         .testimonial-text {
@@ -1308,26 +1326,27 @@
         }
 
         function updateCarousel() {
-            const cardWidth = 380;
-            const gap = 30;
-            const containerWidth = track.parentElement.offsetWidth;
-            const centerOffset = (containerWidth / 2) - (cardWidth / 2);
-
-            // Calculate how much to move the track to center the current card
-            const moveAmount = (currentIndex * (cardWidth + gap)) - centerOffset;
-            track.style.transform = `translateX(-${moveAmount}px)`;
-
-            // Update card states based on distance from center
+            // Update card positions for 5-card overlapping display
             testimonialCards.forEach((card, index) => {
-                const distance = Math.abs(index - currentIndex);
+                const relativePosition = index - currentIndex;
 
-                if (distance === 0) {
+                if (relativePosition === 0) {
+                    // Center card
                     card.setAttribute('data-position', 'center');
-                } else if (distance === 1) {
-                    card.setAttribute('data-position', 'adjacent');
-                } else if (distance === 2) {
-                    card.setAttribute('data-position', 'far');
+                } else if (relativePosition === -1 || (relativePosition === totalTestimonials - 1)) {
+                    // Left adjacent (wraps around)
+                    card.setAttribute('data-position', 'left-1');
+                } else if (relativePosition === 1 || (relativePosition === -(totalTestimonials - 1))) {
+                    // Right adjacent (wraps around)
+                    card.setAttribute('data-position', 'right-1');
+                } else if (relativePosition === -2 || (relativePosition === totalTestimonials - 2)) {
+                    // Left far (wraps around)
+                    card.setAttribute('data-position', 'left-2');
+                } else if (relativePosition === 2 || (relativePosition === -(totalTestimonials - 2))) {
+                    // Right far (wraps around)
+                    card.setAttribute('data-position', 'right-2');
                 } else {
+                    // Hidden
                     card.setAttribute('data-position', 'hidden');
                 }
             });
