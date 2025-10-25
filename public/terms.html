@@ -217,12 +217,20 @@
 
         /* Footer */
         footer {
-            padding: 40px 0;
+            padding: 24px 0;
             text-align: center;
             color: #6b7280;
             background: #fafafa;
             border-top: 1px solid #f0f0f0;
-            margin-top: 80px;
+            margin-top: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100px;
+        }
+
+        footer > p {
+            margin: 0;
         }
 
         footer a {
@@ -448,13 +456,15 @@
 
     <!-- Footer -->
     <footer>
-        <p>
-            <a href="/privacy">Privacy Policy</a>
-            <a href="/terms">Terms of Service</a>
-            <a href="/cookies">Cookie Policy</a>
-            <a href="/gdpr">GDPR & Data Protection</a>
-        </p>
-        <p style="margin-top: 16px;">&copy; 2025 ChronosAI. All rights reserved.</p>
+        <div>
+            <p style="margin-bottom: 12px;">
+                <a href="/privacy">Privacy Policy</a>
+                <a href="/terms">Terms of Service</a>
+                <a href="/cookies">Cookie Policy</a>
+                <a href="/gdpr">GDPR & Data Protection</a>
+            </p>
+            <p>&copy; 2025 ChronosAI. All rights reserved.</p>
+        </div>
     </footer>
 </body>
 </html>
