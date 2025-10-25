@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cookie Policy - ChronosAI</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #ffffff;
+            color: #1a1a1a;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            padding: 25px 0;
+            background: #ffffff;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+
+        .logo:hover {
+            opacity: 0.8;
+        }
+
+        .logo-image {
+            height: 50px;
+            width: auto;
+            display: block;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .btn-secondary {
+            padding: 10px 24px;
+            background: transparent;
+            color: #4a5568;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-secondary:hover {
+            background: #f5f3ff;
+            color: #8b5cf6;
+        }
+
+        .btn-primary {
+            padding: 10px 24px;
+            background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(139, 92, 246, 0.4);
+        }
+
+        /* Main content */
+        .content {
+            max-width: 900px;
+            margin: 120px auto 60px;
+            padding: 0 40px;
+        }
+
+        h1 {
+            font-size: 48px;
+            font-weight: 800;
+            color: #1a1a1a;
+            margin-bottom: 10px;
+        }
+
+        .last-updated {
+            color: #6b7280;
+            font-size: 16px;
+            margin-bottom: 40px;
+        }
+
+        .highlight {
+            background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+            padding: 24px;
+            border-left: 4px solid #10b981;
+            margin: 30px 0;
+            border-radius: 8px;
+        }
+
+        .highlight strong {
+            color: #047857;
+            font-size: 18px;
+        }
+
+        h2 {
+            color: #1a1a1a;
+            font-size: 32px;
+            margin-top: 40px;
+            margin-bottom: 16px;
+            font-weight: 700;
+        }
+
+        h3 {
+            color: #4a5568;
+            font-size: 22px;
+            margin-top: 24px;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        p {
+            margin-bottom: 16px;
+            font-size: 17px;
+            color: #4a5568;
+            line-height: 1.7;
+        }
+
+        ul {
+            margin-left: 24px;
+            margin-bottom: 20px;
+        }
+
+        li {
+            margin-bottom: 12px;
+            font-size: 17px;
+            color: #4a5568;
+            line-height: 1.7;
+        }
+
+        li strong {
+            color: #1a1a1a;
+        }
+
+        a {
+            color: #8b5cf6;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        a:hover {
+            color: #6d28d9;
+            text-decoration: underline;
+        }
+
+        .info-box {
+            background: #f0f9ff;
+            border-left: 4px solid #3b82f6;
+            padding: 24px;
+            border-radius: 8px;
+            margin: 30px 0;
+        }
+
+        .info-box strong {
+            color: #1e40af;
+        }
+
+        .contact-box {
+            background: #f9fafb;
+            padding: 32px;
+            border-radius: 12px;
+            margin: 40px 0;
+            border: 1px solid #e5e7eb;
+        }
+
+        .contact-box h2 {
+            margin-top: 0;
+        }
+
+        hr {
+            margin: 50px 0;
+            border: none;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        /* Footer */
+        footer {
+            padding: 40px 0;
+            text-align: center;
+            color: #6b7280;
+            background: #fafafa;
+            border-top: 1px solid #f0f0f0;
+            margin-top: 80px;
+        }
+
+        footer a {
+            color: #8b5cf6;
+            margin: 0 12px;
+        }
+
+        /* Mobile responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                padding: 0 20px;
+            }
+
+            .content {
+                padding: 0 20px;
+                margin: 100px auto 40px;
+            }
+
+            h1 {
+                font-size: 36px;
+            }
+
+            h2 {
+                font-size: 26px;
+            }
+
+            h3 {
+                font-size: 20px;
+            }
+
+            p, li {
+                font-size: 16px;
+            }
+
+            .logo-image {
+                height: 40px;
+            }
+
+            .nav-buttons {
+                gap: 8px;
+            }
+
+            .btn-secondary, .btn-primary {
+                padding: 10px 18px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <a href="/" class="logo">
+                <img src="logo_img.jpg" alt="ChronosAI Logo" class="logo-image">
+            </a>
+            <div class="nav-buttons">
+                <a href="/#benefits" class="btn-secondary">Learn More</a>
+                <a href="/#feedback" class="btn-primary">Feedback</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="content">
+        <h1>Cookie Policy</h1>
+        <p class="last-updated">Last Updated: December 25, 2025</p>
+
+        <div class="highlight">
+            <strong>🍪 Good News:</strong> We don't use cookies! Neither the Chronos extension nor our website uses cookies for tracking or data collection.
+        </div>
+
+        <h2>Overview</h2>
+        <p>
+            This Cookie Policy explains how Chronos AI ("Chronos", "we", "us", or "our") handles cookies and similar technologies on our website (chronosai.org) and in our Chrome extension.
+        </p>
+
+        <h2>What Are Cookies?</h2>
+        <p>
+            Cookies are small text files that websites store on your device to remember information about your visit. They're commonly used for:
+        </p>
+        <ul>
+            <li>Keeping you logged in</li>
+            <li>Remembering your preferences</li>
+            <li>Tracking website analytics</li>
+            <li>Serving personalized advertisements</li>
+        </ul>
+
+        <h2>Our Cookie-Free Approach</h2>
+        <p>
+            <strong>Chronos does not use cookies.</strong> Here's what we use instead:
+        </p>
+
+        <h3>On Our Website (chronosai.org):</h3>
+        <ul>
+            <li><strong>No tracking cookies:</strong> We don't use Google Analytics, Facebook Pixel, or any third-party tracking</li>
+            <li><strong>No advertising cookies:</strong> We don't serve ads or use marketing cookies</li>
+            <li><strong>Server-side analytics only:</strong> We collect basic visit statistics (page views, referrers) on our server, without using cookies</li>
+            <li><strong>No persistent identifiers:</strong> We cannot track individual users across sessions</li>
+        </ul>
+
+        <h3>In Our Chrome Extension:</h3>
+        <ul>
+            <li><strong>No cookies used:</strong> The extension does not set or read any cookies</li>
+            <li><strong>Chrome's Local Storage API:</strong> We use Chrome's built-in storage API to save your preferences locally on your device</li>
+            <li><strong>OAuth tokens:</strong> Authentication tokens for Google/Outlook are stored securely using Chrome's encrypted storage, not cookies</li>
+        </ul>
+
+        <h2>What Data Do We Collect?</h2>
+        <p>
+            Since we don't use cookies, here's what we <em>do</em> collect:
+        </p>
+
+        <h3>Website Analytics (Server-Side):</h3>
+        <ul>
+            <li>Page visit counts</li>
+            <li>Referrer information (which site sent you to us)</li>
+            <li>General browser and device information (user agent)</li>
+            <li>IP addresses (for abuse prevention only, not for tracking)</li>
+        </ul>
+
+        <p>
+            This data is collected server-side, not through cookies, and does not track individual users across sessions.
+        </p>
+
+        <h3>Extension Local Storage:</h3>
+        <ul>
+            <li>Your calendar preferences (Google/Outlook selection)</li>
+            <li>Draft calendar events (before you confirm them)</li>
+            <li>Input text (so you can resume where you left off)</li>
+        </ul>
+
+        <p>
+            This data is stored <strong>locally on your device only</strong> using Chrome's storage API. It never leaves your device and is not synced to our servers.
+        </p>
+
+        <div class="info-box">
+            <strong>ℹ️ Technical Note:</strong> Chrome's Local Storage API is not the same as cookies. Local storage data is stored in your browser's database and is only accessible by our extension, not by third parties or across different websites.
+        </div>
+
+        <h2>Third-Party Services</h2>
+        <p>
+            While we don't use cookies, our extension communicates with third-party APIs:
+        </p>
+        <ul>
+            <li><strong>OpenAI API:</strong> For natural language processing (does not use cookies)</li>
+            <li><strong>Google Calendar API:</strong> For calendar access (uses OAuth, not cookies)</li>
+            <li><strong>Microsoft Outlook API:</strong> For calendar access (uses OAuth, not cookies)</li>
+        </ul>
+
+        <p>
+            These services may have their own cookie policies on their respective websites, but our extension does not interact with their cookies.
+        </p>
+
+        <h2>Browser Local Storage vs. Cookies</h2>
+        <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
+            <tr style="background: #f9fafb; border-bottom: 2px solid #e5e7eb;">
+                <th style="padding: 12px; text-align: left;">Feature</th>
+                <th style="padding: 12px; text-align: left;">Cookies</th>
+                <th style="padding: 12px; text-align: left;">Chrome Local Storage (What We Use)</th>
+            </tr>
+            <tr style="border-bottom: 1px solid #e5e7eb;">
+                <td style="padding: 12px;"><strong>Sent to server</strong></td>
+                <td style="padding: 12px;">Yes, with every request</td>
+                <td style="padding: 12px;">No, stays on your device</td>
+            </tr>
+            <tr style="border-bottom: 1px solid #e5e7eb;">
+                <td style="padding: 12px;"><strong>Accessible by third parties</strong></td>
+                <td style="padding: 12px;">Potentially, yes</td>
+                <td style="padding: 12px;">No, isolated to our extension</td>
+            </tr>
+            <tr style="border-bottom: 1px solid #e5e7eb;">
+                <td style="padding: 12px;"><strong>Used for tracking</strong></td>
+                <td style="padding: 12px;">Commonly used</td>
+                <td style="padding: 12px;">Cannot be used for tracking</td>
+            </tr>
+            <tr style="border-bottom: 1px solid #e5e7eb;">
+                <td style="padding: 12px;"><strong>Storage limit</strong></td>
+                <td style="padding: 12px;">~4KB per cookie</td>
+                <td style="padding: 12px;">~10MB total</td>
+            </tr>
+        </table>
+
+        <h2>Your Control</h2>
+        <p>
+            Since we don't use cookies, there's nothing to accept or decline. However, you can:
+        </p>
+        <ul>
+            <li><strong>Clear local storage:</strong> Uninstall the Chronos extension to remove all locally stored data</li>
+            <li><strong>View what's stored:</strong> Use Chrome DevTools to inspect what data is stored locally</li>
+            <li><strong>Disable storage:</strong> Revoke the "storage" permission from the extension (though this will prevent Chronos from saving your preferences)</li>
+        </ul>
+
+        <h2>Changes to This Policy</h2>
+        <p>
+            If we ever decide to use cookies in the future, we will update this policy and notify you appropriately. We are committed to transparency and will always give you control over your data.
+        </p>
+
+        <h2>EU Cookie Law & GDPR Compliance</h2>
+        <p>
+            Under EU law (ePrivacy Directive and GDPR), websites must obtain consent before using cookies. Since Chronos does not use cookies, we do not require cookie consent banners or disclosures.
+        </p>
+        <p>
+            If you are located in the EU, please also review our <a href="/gdpr">GDPR & Data Protection</a> page for information about your data rights.
+        </p>
+
+        <h2>Contact Us</h2>
+        <p>
+            For more information about how we handle your data, please see our <a href="/privacy">Privacy Policy</a>.
+        </p>
+
+        <div class="contact-box">
+            <h2>Questions?</h2>
+            <p>If you have questions about this Cookie Policy, please contact us:</p>
+            <p>
+                <strong>Email:</strong> <a href="mailto:chronosai.feedback@gmail.com">chronosai.feedback@gmail.com</a><br>
+                <strong>Website:</strong> <a href="https://www.chronosai.org">www.chronosai.org</a>
+            </p>
+        </div>
+
+        <hr>
+
+        <p style="text-align: center; color: #999; font-size: 0.95em;">
+            © 2025 Chronos AI. Cookie-free and proud of it.
+        </p>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>
+            <a href="/privacy">Privacy Policy</a>
+            <a href="/terms">Terms of Service</a>
+            <a href="/cookies">Cookie Policy</a>
+            <a href="/gdpr">GDPR & Data Protection</a>
+        </p>
+        <p style="margin-top: 16px;">&copy; 2025 ChronosAI. All rights reserved.</p>
+    </footer>
+</body>
+</html>

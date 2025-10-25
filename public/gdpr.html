@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GDPR & Data Protection - ChronosAI</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #ffffff;
+            color: #1a1a1a;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            padding: 25px 0;
+            background: #ffffff;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+
+        .logo:hover {
+            opacity: 0.8;
+        }
+
+        .logo-image {
+            height: 50px;
+            width: auto;
+            display: block;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .btn-secondary {
+            padding: 10px 24px;
+            background: transparent;
+            color: #4a5568;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-secondary:hover {
+            background: #f5f3ff;
+            color: #8b5cf6;
+        }
+
+        .btn-primary {
+            padding: 10px 24px;
+            background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(139, 92, 246, 0.4);
+        }
+
+        /* Main content */
+        .content {
+            max-width: 900px;
+            margin: 120px auto 60px;
+            padding: 0 40px;
+        }
+
+        h1 {
+            font-size: 48px;
+            font-weight: 800;
+            color: #1a1a1a;
+            margin-bottom: 10px;
+        }
+
+        .last-updated {
+            color: #6b7280;
+            font-size: 16px;
+            margin-bottom: 40px;
+        }
+
+        .highlight {
+            background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+            padding: 24px;
+            border-left: 4px solid #3b82f6;
+            margin: 30px 0;
+            border-radius: 8px;
+        }
+
+        .highlight strong {
+            color: #1e40af;
+            font-size: 18px;
+        }
+
+        h2 {
+            color: #1a1a1a;
+            font-size: 32px;
+            margin-top: 40px;
+            margin-bottom: 16px;
+            font-weight: 700;
+        }
+
+        h3 {
+            color: #4a5568;
+            font-size: 22px;
+            margin-top: 24px;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        p {
+            margin-bottom: 16px;
+            font-size: 17px;
+            color: #4a5568;
+            line-height: 1.7;
+        }
+
+        ul {
+            margin-left: 24px;
+            margin-bottom: 20px;
+        }
+
+        li {
+            margin-bottom: 12px;
+            font-size: 17px;
+            color: #4a5568;
+            line-height: 1.7;
+        }
+
+        li strong {
+            color: #1a1a1a;
+        }
+
+        a {
+            color: #8b5cf6;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        a:hover {
+            color: #6d28d9;
+            text-decoration: underline;
+        }
+
+        .info-box {
+            background: #f0fdf4;
+            border-left: 4px solid #10b981;
+            padding: 24px;
+            border-radius: 8px;
+            margin: 30px 0;
+        }
+
+        .info-box strong {
+            color: #065f46;
+        }
+
+        .rights-box {
+            background: #fef3c7;
+            border-left: 4px solid #f59e0b;
+            padding: 24px;
+            border-radius: 8px;
+            margin: 30px 0;
+        }
+
+        .rights-box strong {
+            color: #92400e;
+        }
+
+        .contact-box {
+            background: #f9fafb;
+            padding: 32px;
+            border-radius: 12px;
+            margin: 40px 0;
+            border: 1px solid #e5e7eb;
+        }
+
+        .contact-box h2 {
+            margin-top: 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        th {
+            background: #f9fafb;
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+
+        hr {
+            margin: 50px 0;
+            border: none;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        /* Footer */
+        footer {
+            padding: 40px 0;
+            text-align: center;
+            color: #6b7280;
+            background: #fafafa;
+            border-top: 1px solid #f0f0f0;
+            margin-top: 80px;
+        }
+
+        footer a {
+            color: #8b5cf6;
+            margin: 0 12px;
+        }
+
+        /* Mobile responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                padding: 0 20px;
+            }
+
+            .content {
+                padding: 0 20px;
+                margin: 100px auto 40px;
+            }
+
+            h1 {
+                font-size: 36px;
+            }
+
+            h2 {
+                font-size: 26px;
+            }
+
+            h3 {
+                font-size: 20px;
+            }
+
+            p, li {
+                font-size: 16px;
+            }
+
+            .logo-image {
+                height: 40px;
+            }
+
+            .nav-buttons {
+                gap: 8px;
+            }
+
+            .btn-secondary, .btn-primary {
+                padding: 10px 18px;
+                font-size: 14px;
+            }
+
+            table {
+                font-size: 14px;
+            }
+
+            th, td {
+                padding: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <a href="/" class="logo">
+                <img src="logo_img.jpg" alt="ChronosAI Logo" class="logo-image">
+            </a>
+            <div class="nav-buttons">
+                <a href="/#benefits" class="btn-secondary">Learn More</a>
+                <a href="/#feedback" class="btn-primary">Feedback</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="content">
+        <h1>GDPR & Data Protection</h1>
+        <p class="last-updated">Last Updated: December 25, 2025</p>
+
+        <div class="highlight">
+            <strong>🇪🇺 Your Data Rights:</strong> If you're in the European Economic Area (EEA), UK, or Switzerland, you have specific rights under the General Data Protection Regulation (GDPR). This page explains those rights and how we protect your data.
+        </div>
+
+        <h2>Overview</h2>
+        <p>
+            Chronos AI ("Chronos", "we", "us", or "our") is committed to protecting your privacy and complying with data protection laws, including the EU General Data Protection Regulation (GDPR). This page supplements our <a href="/privacy">Privacy Policy</a> and provides specific information for users in the EEA, UK, and Switzerland.
+        </p>
+
+        <h2>Data Controller</h2>
+        <p>
+            The data controller responsible for your personal data is:
+        </p>
+        <ul>
+            <li><strong>Entity:</strong> Chronos AI (Individual developer project)</li>
+            <li><strong>Location:</strong> United Arab Emirates</li>
+            <li><strong>Contact:</strong> <a href="mailto:chronosai.feedback@gmail.com">chronosai.feedback@gmail.com</a></li>
+        </ul>
+
+        <h2>What Data We Process</h2>
+        <p>
+            <strong>Good news:</strong> Chronos does not store your personal data on our servers.
+        </p>
+
+        <h3>Website (chronosai.org):</h3>
+        <ul>
+            <li><strong>No email collection:</strong> We removed the waitlist feature after product launch</li>
+            <li><strong>Server logs:</strong> Anonymous analytics (page views, referrers) - no personal data stored</li>
+        </ul>
+
+        <h3>Chrome Extension:</h3>
+        <ul>
+            <li><strong>Calendar data:</strong> Stored locally on your device only, never sent to our servers</li>
+            <li><strong>Text/voice input:</strong> Sent to OpenAI API for real-time processing (not stored by us)</li>
+            <li><strong>OAuth tokens:</strong> Stored securely in Chrome's encrypted storage on your device</li>
+            <li><strong>Preferences:</strong> Stored locally in your browser using Chrome's storage API</li>
+        </ul>
+
+        <div class="info-box">
+            <strong>✓ Privacy by Design:</strong> Chronos does not store your data on our servers. All your calendar events, preferences, and personal information stay on your device. We cannot access your data because we never receive it.
+        </div>
+
+        <h2>Legal Basis for Processing</h2>
+        <p>
+            Under GDPR Article 6, we process your data based on the following legal grounds:
+        </p>
+
+        <table>
+            <tr>
+                <th>Data Type</th>
+                <th>Legal Basis</th>
+                <th>Purpose</th>
+            </tr>
+            <tr>
+                <td>Calendar access</td>
+                <td><strong>Consent</strong> (Article 6(1)(a))</td>
+                <td>You explicitly authorize Chronos to access your Google/Outlook calendar</td>
+            </tr>
+            <tr>
+                <td>AI processing (text/voice)</td>
+                <td><strong>Contract Performance</strong> (Article 6(1)(b))</td>
+                <td>Necessary to provide the calendar assistant service you requested</td>
+            </tr>
+            <tr>
+                <td>Website analytics (anonymous)</td>
+                <td><strong>Legitimate Interest</strong> (Article 6(1)(f))</td>
+                <td>Understanding traffic patterns, preventing abuse, improving service</td>
+            </tr>
+            <tr>
+                <td>Local storage (on your device)</td>
+                <td><strong>Not applicable</strong></td>
+                <td>Data stays on your device - we don't process it</td>
+            </tr>
+        </table>
+
+        <h2>Your Rights Under GDPR</h2>
+        <p>
+            As a data subject in the EEA, UK, or Switzerland, you have the following rights:
+        </p>
+
+        <h3>1. Right to Access (Article 15)</h3>
+        <p>
+            <strong>Status:</strong> We don't store your personal data on our servers, so there's nothing to access.
+        </p>
+        <p>
+            <strong>Your data is on your device:</strong> All your calendar events and preferences are stored locally in your browser. You can view them anytime using Chrome DevTools (chrome://extensions → Chronos → Inspect views).
+        </p>
+
+        <h3>2. Right to Rectification (Article 16)</h3>
+        <p>
+            <strong>Status:</strong> Not applicable - we don't store your data to correct.
+        </p>
+        <p>
+            <strong>How to correct data:</strong> Simply edit your calendar events directly in Google Calendar or Outlook Calendar.
+        </p>
+
+        <h3>3. Right to Erasure / "Right to be Forgotten" (Article 17)</h3>
+        <p>
+            <strong>How to exercise:</strong> Uninstall the Chronos extension. All locally stored data (preferences, draft events) is automatically deleted when you uninstall.
+        </p>
+        <p>
+            <strong>Steps:</strong>
+        </p>
+        <ol>
+            <li>Go to chrome://extensions</li>
+            <li>Find "Chronos - Natural Calendar Assistant"</li>
+            <li>Click "Remove"</li>
+            <li>All local data is immediately deleted</li>
+        </ol>
+
+        <h3>4. Right to Data Portability (Article 20)</h3>
+        <p>
+            <strong>Status:</strong> Not applicable - we don't hold your data.
+        </p>
+        <p>
+            <strong>Your calendar data:</strong> Managed by Google or Microsoft. You can export it using their tools:
+        </p>
+        <ul>
+            <li><strong>Google Calendar:</strong> Settings → Import & Export</li>
+            <li><strong>Outlook Calendar:</strong> File → Save Calendar</li>
+        </ul>
+
+        <h3>5. Right to Object (Article 21)</h3>
+        <p>
+            <strong>How to exercise:</strong> You can revoke Chronos's access to your calendar at any time:
+        </p>
+        <ul>
+            <li><strong>Google:</strong> myaccount.google.com → Security → Third-party apps → Remove Chronos</li>
+            <li><strong>Microsoft:</strong> account.microsoft.com → Privacy → Apps & services → Remove Chronos</li>
+        </ul>
+
+        <h3>6. Right to Restrict Processing (Article 18)</h3>
+        <p>
+            <strong>How to exercise:</strong> You control all processing by using or not using the extension. There's no background processing when you're not actively using Chronos.
+        </p>
+
+        <h3>7. Right to Withdraw Consent (Article 7)</h3>
+        <p>
+            <strong>How to exercise:</strong> Revoke calendar access (see "Right to Object" above) or uninstall the extension. You can withdraw consent at any time without affecting prior lawful processing.
+        </p>
+
+        <div class="rights-box">
+            <strong>⚖️ Lodge a Complaint:</strong> You have the right to lodge a complaint with your local data protection authority if you believe we've violated your data protection rights. For a list of EU supervisory authorities, visit <a href="https://edpb.europa.eu/about-edpb/board/members_en" target="_blank">edpb.europa.eu</a>.
+        </div>
+
+        <h2>Data Retention</h2>
+        <p>
+            <strong>Simple answer:</strong> We don't store your data on our servers, so there's nothing to retain.
+        </p>
+        <ul>
+            <li><strong>Calendar events:</strong> Stored locally on your device. Deleted automatically when you uninstall the extension.</li>
+            <li><strong>OAuth tokens:</strong> Stored locally in Chrome's encrypted storage. Deleted when you uninstall or revoke access.</li>
+            <li><strong>Preferences:</strong> Stored locally in your browser. Deleted when you uninstall the extension.</li>
+            <li><strong>Website analytics:</strong> Anonymous server logs (no personal data) retained for 12 months for abuse prevention, then deleted.</li>
+        </ul>
+        <p>
+            <strong>Important:</strong> Your calendar data is managed by Google or Microsoft, not us. Their retention policies apply to your calendar events.
+        </p>
+
+        <h2>International Data Transfers</h2>
+        <p>
+            When you use Chronos, your calendar event text is sent to third-party APIs located in the United States:
+        </p>
+
+        <h3>Data Transfers to the US:</h3>
+        <ul>
+            <li><strong>OpenAI API (US):</strong> Your text/voice input is sent to OpenAI's GPT-4o-mini API for natural language processing</li>
+            <li><strong>Google Calendar API (US):</strong> Your calendar events are sent to Google's servers to create/manage events</li>
+            <li><strong>Microsoft Graph API (US):</strong> Your calendar events are sent to Microsoft's servers for Outlook integration</li>
+        </ul>
+
+        <h3>Legal Basis for Transfers:</h3>
+        <p>
+            These data transfers are <strong>necessary to provide the service you requested</strong> (GDPR Article 49(1)(b)). Without sending your calendar event data to these APIs, Chronos cannot function.
+        </p>
+
+        <h3>Safeguards:</h3>
+        <ul>
+            <li><strong>Standard Contractual Clauses (SCCs):</strong> OpenAI, Google, and Microsoft use EU-approved SCCs for data transfers</li>
+            <li><strong>GDPR Compliance:</strong> All three providers have comprehensive GDPR compliance programs</li>
+            <li><strong>Your Control:</strong> You explicitly authorize these transfers when you connect your calendar</li>
+            <li><strong>Transparency:</strong> We clearly disclose where your data goes in our Privacy Policy</li>
+        </ul>
+
+        <p>
+            <strong>Important:</strong> We do not transfer your data to our own servers. All transfers are directly to the third-party services that provide the functionality you're using.
+        </p>
+
+        <h2>Data Security</h2>
+        <p>
+            We implement appropriate technical and organizational measures to protect your data:
+        </p>
+        <ul>
+            <li><strong>Encryption:</strong> All data transmissions use HTTPS/TLS encryption</li>
+            <li><strong>Access controls:</strong> Administrative access to servers is password-protected and limited</li>
+            <li><strong>Minimal collection:</strong> We only collect data that is necessary for providing the service</li>
+            <li><strong>Regular review:</strong> We regularly review our data practices and security measures</li>
+        </ul>
+
+        <h2>Automated Decision-Making</h2>
+        <p>
+            Chronos uses AI (OpenAI GPT-4o-mini) to parse natural language input and create calendar events. However:
+        </p>
+        <ul>
+            <li>You always review and confirm events before they're created</li>
+            <li>No automated decisions with legal or significant effects are made</li>
+            <li>You maintain full control over your calendar events</li>
+        </ul>
+
+        <h2>Children's Data</h2>
+        <p>
+            Chronos is not directed to children under 13 (or 16 in some EU countries). We do not knowingly collect data from children. If you believe a child has provided us with personal data, please contact us immediately.
+        </p>
+
+        <h2>Changes to This Policy</h2>
+        <p>
+            We will notify you of material changes to this GDPR policy by updating the "Last Updated" date. For significant changes affecting your rights, we may provide additional notice via email (if we have your email address).
+        </p>
+
+        <h2>DPO (Data Protection Officer)</h2>
+        <p>
+            As a small operation, we are not required to appoint a formal Data Protection Officer under GDPR Article 37. However, for all data protection inquiries, please contact:
+        </p>
+        <p>
+            <strong>Email:</strong> <a href="mailto:chronosai.feedback@gmail.com">chronosai.feedback@gmail.com</a><br>
+            <strong>Subject line:</strong> "GDPR Request" or "Data Protection Inquiry"
+        </p>
+
+        <div class="contact-box">
+            <h2>Exercise Your Rights</h2>
+            <p><strong>Most rights are self-service:</strong></p>
+            <ul style="margin-left: 0; list-style: none;">
+                <li>✓ <strong>Delete your data:</strong> Uninstall the extension (chrome://extensions)</li>
+                <li>✓ <strong>Revoke calendar access:</strong> Remove Chronos from Google/Microsoft account settings</li>
+                <li>✓ <strong>Stop processing:</strong> Simply stop using the extension</li>
+            </ul>
+            <p style="margin-top: 20px;">
+                <strong>Need help or have questions?</strong><br>
+                Email: <a href="mailto:chronosai.feedback@gmail.com">chronosai.feedback@gmail.com</a><br>
+                Subject line: "GDPR Request" or "Data Protection Inquiry"<br>
+                Response time: Within 30 days
+            </p>
+        </div>
+
+        <hr>
+
+        <p style="text-align: center; color: #999; font-size: 0.95em;">
+            © 2025 Chronos AI. Your data, your rights.
+        </p>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>
+            <a href="/privacy">Privacy Policy</a>
+            <a href="/terms">Terms of Service</a>
+            <a href="/cookies">Cookie Policy</a>
+            <a href="/gdpr">GDPR & Data Protection</a>
+        </p>
+        <p style="margin-top: 16px;">&copy; 2025 ChronosAI. All rights reserved.</p>
+    </footer>
+</body>
+</html>

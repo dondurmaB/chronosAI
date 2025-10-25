@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - ChronosAI</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #ffffff;
+            color: #1a1a1a;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            padding: 25px 0;
+            background: #ffffff;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+
+        .logo:hover {
+            opacity: 0.8;
+        }
+
+        .logo-image {
+            height: 50px;
+            width: auto;
+            display: block;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .btn-secondary {
+            padding: 10px 24px;
+            background: transparent;
+            color: #4a5568;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-secondary:hover {
+            background: #f5f3ff;
+            color: #8b5cf6;
+        }
+
+        .btn-primary {
+            padding: 10px 24px;
+            background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(139, 92, 246, 0.4);
+        }
+
+        /* Main content */
+        .content {
+            max-width: 900px;
+            margin: 120px auto 60px;
+            padding: 0 40px;
+        }
+
+        h1 {
+            font-size: 48px;
+            font-weight: 800;
+            color: #1a1a1a;
+            margin-bottom: 10px;
+        }
+
+        .last-updated {
+            color: #6b7280;
+            font-size: 16px;
+            margin-bottom: 40px;
+        }
+
+        .highlight {
+            background: linear-gradient(135deg, #faf5ff 0%, #f5f3ff 100%);
+            padding: 24px;
+            border-left: 4px solid #8b5cf6;
+            margin: 30px 0;
+            border-radius: 8px;
+        }
+
+        .highlight strong {
+            color: #8b5cf6;
+            font-size: 18px;
+        }
+
+        h2 {
+            color: #1a1a1a;
+            font-size: 32px;
+            margin-top: 40px;
+            margin-bottom: 16px;
+            font-weight: 700;
+        }
+
+        h3 {
+            color: #4a5568;
+            font-size: 22px;
+            margin-top: 24px;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        p {
+            margin-bottom: 16px;
+            font-size: 17px;
+            color: #4a5568;
+            line-height: 1.7;
+        }
+
+        ul {
+            margin-left: 24px;
+            margin-bottom: 20px;
+        }
+
+        li {
+            margin-bottom: 12px;
+            font-size: 17px;
+            color: #4a5568;
+            line-height: 1.7;
+        }
+
+        li strong {
+            color: #1a1a1a;
+        }
+
+        a {
+            color: #8b5cf6;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        a:hover {
+            color: #6d28d9;
+            text-decoration: underline;
+        }
+
+        .contact-box {
+            background: #f9fafb;
+            padding: 32px;
+            border-radius: 12px;
+            margin: 40px 0;
+            border: 1px solid #e5e7eb;
+        }
+
+        .contact-box h2 {
+            margin-top: 0;
+        }
+
+        hr {
+            margin: 50px 0;
+            border: none;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        /* Footer */
+        footer {
+            padding: 40px 0;
+            text-align: center;
+            color: #6b7280;
+            background: #fafafa;
+            border-top: 1px solid #f0f0f0;
+            margin-top: 80px;
+        }
+
+        footer a {
+            color: #8b5cf6;
+            margin: 0 12px;
+        }
+
+        /* Mobile responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                padding: 0 20px;
+            }
+
+            .content {
+                padding: 0 20px;
+                margin: 100px auto 40px;
+            }
+
+            h1 {
+                font-size: 36px;
+            }
+
+            h2 {
+                font-size: 26px;
+            }
+
+            h3 {
+                font-size: 20px;
+            }
+
+            p, li {
+                font-size: 16px;
+            }
+
+            .logo-image {
+                height: 40px;
+            }
+
+            .nav-buttons {
+                gap: 8px;
+            }
+
+            .btn-secondary, .btn-primary {
+                padding: 10px 18px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <a href="/" class="logo">
+                <img src="logo_img.jpg" alt="ChronosAI Logo" class="logo-image">
+            </a>
+            <div class="nav-buttons">
+                <a href="/#benefits" class="btn-secondary">Learn More</a>
+                <a href="/#feedback" class="btn-primary">Feedback</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="content">
+        <h1>Privacy Policy</h1>
+        <p class="last-updated">Last Updated: December 25, 2025</p>
+
+        <div class="highlight">
+            <strong>🔒 Your Privacy Matters:</strong> Chronos is built with privacy at its core. All your calendar data stays on your device. We never collect, transmit, or store your personal information on our servers.
+        </div>
+
+        <h2>Overview</h2>
+        <p>
+            Chronos - Natural Calendar Assistant ("Chronos", "we", "us", or "our") is a Chrome extension that helps you create calendar events using natural language. This Privacy Policy explains how we handle your data.
+        </p>
+
+        <h2>Information We Do NOT Collect</h2>
+        <p>We want to be crystal clear about what we DON'T do:</p>
+        <ul>
+            <li><strong>Calendar Events:</strong> We do not collect, store, or transmit your calendar event details</li>
+            <li><strong>Personal Information:</strong> We do not collect names, email addresses, or personal data</li>
+            <li><strong>Usage Analytics:</strong> We do not track how you use the extension</li>
+            <li><strong>Browsing History:</strong> We do not access or record your browsing activity</li>
+            <li><strong>Location Data:</strong> We do not collect location information</li>
+        </ul>
+
+        <h2>How Chronos Works</h2>
+        <p>
+            Chronos operates entirely on your local device:
+        </p>
+        <ul>
+            <li><strong>Natural Language Processing:</strong> Your input is sent to OpenAI's GPT-4o-mini API to parse calendar events. This is processed in real-time and not stored by us.</li>
+            <li><strong>Voice Transcription:</strong> If you use voice input, audio is sent to OpenAI's Whisper API for transcription. The audio is not stored by us.</li>
+            <li><strong>Calendar Integration:</strong> Events are created directly in your Google Calendar or Outlook Calendar using their official APIs. We act as a bridge - data goes directly from your device to your calendar provider.</li>
+            <li><strong>Local Storage:</strong> Your preferences (calendar selections) and draft events are stored locally in your browser using Chrome's storage API. This data never leaves your device.</li>
+        </ul>
+
+        <h2>Third-Party Services</h2>
+        <p>Chronos uses the following third-party services:</p>
+
+        <h3>OpenAI API</h3>
+        <ul>
+            <li><strong>Purpose:</strong> Natural language processing and voice transcription</li>
+            <li><strong>Data Sent:</strong> Your text input and voice recordings (if you use voice input)</li>
+            <li><strong>OpenAI's Privacy Policy:</strong> <a href="https://openai.com/privacy" target="_blank">https://openai.com/privacy</a></li>
+            <li><strong>Data Retention:</strong> Per OpenAI's policy, API data may be retained for up to 30 days for abuse monitoring, then deleted</li>
+        </ul>
+
+        <h3>Google Calendar API</h3>
+        <ul>
+            <li><strong>Purpose:</strong> Creating and managing calendar events</li>
+            <li><strong>Data Access:</strong> We only access what you explicitly authorize (calendar events)</li>
+            <li><strong>Google's Privacy Policy:</strong> <a href="https://policies.google.com/privacy" target="_blank">https://policies.google.com/privacy</a></li>
+            <li><strong>Permissions:</strong> You can revoke access anytime in your Google Account settings</li>
+        </ul>
+
+        <h3>Microsoft Outlook Calendar API</h3>
+        <ul>
+            <li><strong>Purpose:</strong> Creating and managing calendar events</li>
+            <li><strong>Data Access:</strong> We only access what you explicitly authorize (calendar events)</li>
+            <li><strong>Microsoft's Privacy Policy:</strong> <a href="https://privacy.microsoft.com/privacystatement" target="_blank">https://privacy.microsoft.com/privacystatement</a></li>
+            <li><strong>Permissions:</strong> You can revoke access anytime in your Microsoft Account settings</li>
+        </ul>
+
+        <h2>Data Storage</h2>
+        <p>The only data stored by Chronos is:</p>
+        <ul>
+            <li><strong>Local Browser Storage:</strong>
+                <ul>
+                    <li>Calendar provider preferences (Google/Outlook selection)</li>
+                    <li>Draft events (before you confirm them)</li>
+                    <li>Input text (so you can resume where you left off)</li>
+                </ul>
+            </li>
+            <li><strong>Stored Locally:</strong> All data is stored in your browser's local storage using Chrome's storage API</li>
+            <li><strong>Not Synced:</strong> This data is not transmitted to our servers (we don't have any servers!)</li>
+            <li><strong>You Control It:</strong> You can clear this data anytime by removing the extension</li>
+        </ul>
+
+        <h2>Permissions Explained</h2>
+        <p>Chronos requests the following Chrome permissions:</p>
+        <ul>
+            <li><strong>storage:</strong> To save your preferences and draft events locally</li>
+            <li><strong>identity:</strong> To authenticate with Google Calendar and Outlook</li>
+            <li><strong>audioCapture:</strong> For voice input feature (only when you click the microphone button)</li>
+            <li><strong>clipboardRead:</strong> For paste button feature (only when you click paste)</li>
+            <li><strong>Host permissions:</strong> To communicate with Google Calendar, Outlook, and OpenAI APIs</li>
+        </ul>
+
+        <h2>Your Rights</h2>
+        <p>You have the right to:</p>
+        <ul>
+            <li><strong>Revoke Access:</strong> Remove Chronos's access to your calendars anytime</li>
+            <li><strong>Delete Data:</strong> Uninstall the extension to remove all local data</li>
+            <li><strong>Control Permissions:</strong> Disable specific permissions in Chrome settings</li>
+            <li><strong>Request Information:</strong> Contact us with questions about your data</li>
+        </ul>
+
+        <h2>Data Security</h2>
+        <ul>
+            <li>All API communications use HTTPS encryption</li>
+            <li>OAuth tokens are stored securely in Chrome's encrypted storage</li>
+            <li>We follow Chrome Web Store security best practices</li>
+            <li>No data is transmitted to third parties except the services mentioned above</li>
+        </ul>
+
+        <h2>Children's Privacy</h2>
+        <p>
+            Chronos is not directed to children under 13. We do not knowingly collect information from children under 13. If you are a parent or guardian and believe your child has used Chronos, please contact us.
+        </p>
+
+        <h2>Changes to This Policy</h2>
+        <p>
+            We may update this Privacy Policy from time to time. We will notify users of any material changes by updating the "Last Updated" date. Continued use of Chronos after changes indicates acceptance of the updated policy.
+        </p>
+
+        <h2>Open Source Commitment</h2>
+        <p>
+            Chronos is committed to transparency. Our code is available for review, allowing you to verify our privacy claims.
+        </p>
+
+        <div class="contact-box">
+            <h2>Contact Us</h2>
+            <p>If you have questions about this Privacy Policy or how Chronos handles data, please contact us:</p>
+            <p>
+                <strong>Email:</strong> <a href="mailto:chronosai.feedback@gmail.com">chronosai.feedback@gmail.com</a><br>
+                <strong>Website:</strong> <a href="https://www.chronosai.org">www.chronosai.org</a>
+            </p>
+        </div>
+
+        <hr>
+
+        <p style="text-align: center; color: #999; font-size: 0.95em;">
+            © 2025 Chronos AI. Built with privacy in mind.
+        </p>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>
+            <a href="/privacy">Privacy Policy</a>
+            <a href="/terms">Terms of Service</a>
+            <a href="/cookies">Cookie Policy</a>
+            <a href="/gdpr">GDPR & Data Protection</a>
+        </p>
+        <p style="margin-top: 16px;">&copy; 2025 ChronosAI. All rights reserved.</p>
+    </footer>
+</body>
+</html>

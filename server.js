@@ -328,6 +328,23 @@ app.get('/api/analytics/detailed', requireAuth, async (req, res) => {
     }
 });
 
+// Serve legal pages
+app.get('/privacy', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'privacy.html'));
+});
+
+app.get('/terms', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'terms.html'));
+});
+
+app.get('/cookies', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'cookies.html'));
+});
+
+app.get('/gdpr', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'gdpr.html'));
+});
+
 // Serve the landing page
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));

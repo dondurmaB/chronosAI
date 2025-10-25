@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms of Service - ChronosAI</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #ffffff;
+            color: #1a1a1a;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            padding: 25px 0;
+            background: #ffffff;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+
+        .logo:hover {
+            opacity: 0.8;
+        }
+
+        .logo-image {
+            height: 50px;
+            width: auto;
+            display: block;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .btn-secondary {
+            padding: 10px 24px;
+            background: transparent;
+            color: #4a5568;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-secondary:hover {
+            background: #f5f3ff;
+            color: #8b5cf6;
+        }
+
+        .btn-primary {
+            padding: 10px 24px;
+            background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(139, 92, 246, 0.4);
+        }
+
+        /* Main content */
+        .content {
+            max-width: 900px;
+            margin: 120px auto 60px;
+            padding: 0 40px;
+        }
+
+        h1 {
+            font-size: 48px;
+            font-weight: 800;
+            color: #1a1a1a;
+            margin-bottom: 10px;
+        }
+
+        .last-updated {
+            color: #6b7280;
+            font-size: 16px;
+            margin-bottom: 40px;
+        }
+
+        .highlight {
+            background: linear-gradient(135deg, #faf5ff 0%, #f5f3ff 100%);
+            padding: 24px;
+            border-left: 4px solid #8b5cf6;
+            margin: 30px 0;
+            border-radius: 8px;
+        }
+
+        .highlight strong {
+            color: #8b5cf6;
+            font-size: 18px;
+        }
+
+        h2 {
+            color: #1a1a1a;
+            font-size: 32px;
+            margin-top: 40px;
+            margin-bottom: 16px;
+            font-weight: 700;
+        }
+
+        h3 {
+            color: #4a5568;
+            font-size: 22px;
+            margin-top: 24px;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        p {
+            margin-bottom: 16px;
+            font-size: 17px;
+            color: #4a5568;
+            line-height: 1.7;
+        }
+
+        ul {
+            margin-left: 24px;
+            margin-bottom: 20px;
+        }
+
+        li {
+            margin-bottom: 12px;
+            font-size: 17px;
+            color: #4a5568;
+            line-height: 1.7;
+        }
+
+        li strong {
+            color: #1a1a1a;
+        }
+
+        a {
+            color: #8b5cf6;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        a:hover {
+            color: #6d28d9;
+            text-decoration: underline;
+        }
+
+        .warning-box {
+            background: #fef3c7;
+            border-left: 4px solid #f59e0b;
+            padding: 24px;
+            border-radius: 8px;
+            margin: 30px 0;
+        }
+
+        .warning-box strong {
+            color: #92400e;
+        }
+
+        .contact-box {
+            background: #f9fafb;
+            padding: 32px;
+            border-radius: 12px;
+            margin: 40px 0;
+            border: 1px solid #e5e7eb;
+        }
+
+        .contact-box h2 {
+            margin-top: 0;
+        }
+
+        hr {
+            margin: 50px 0;
+            border: none;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        /* Footer */
+        footer {
+            padding: 40px 0;
+            text-align: center;
+            color: #6b7280;
+            background: #fafafa;
+            border-top: 1px solid #f0f0f0;
+            margin-top: 80px;
+        }
+
+        footer a {
+            color: #8b5cf6;
+            margin: 0 12px;
+        }
+
+        /* Mobile responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                padding: 0 20px;
+            }
+
+            .content {
+                padding: 0 20px;
+                margin: 100px auto 40px;
+            }
+
+            h1 {
+                font-size: 36px;
+            }
+
+            h2 {
+                font-size: 26px;
+            }
+
+            h3 {
+                font-size: 20px;
+            }
+
+            p, li {
+                font-size: 16px;
+            }
+
+            .logo-image {
+                height: 40px;
+            }
+
+            .nav-buttons {
+                gap: 8px;
+            }
+
+            .btn-secondary, .btn-primary {
+                padding: 10px 18px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <a href="/" class="logo">
+                <img src="logo_img.jpg" alt="ChronosAI Logo" class="logo-image">
+            </a>
+            <div class="nav-buttons">
+                <a href="/#benefits" class="btn-secondary">Learn More</a>
+                <a href="/#feedback" class="btn-primary">Feedback</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="content">
+        <h1>Terms of Service</h1>
+        <p class="last-updated">Last Updated: December 25, 2025</p>
+
+        <div class="highlight">
+            <strong>📜 Agreement:</strong> By installing or using Chronos, you agree to these Terms of Service. Please read them carefully.
+        </div>
+
+        <h2>1. Acceptance of Terms</h2>
+        <p>
+            Welcome to Chronos AI ("Chronos", "we", "us", or "our"). By installing, accessing, or using the Chronos Chrome extension and related services, you agree to be bound by these Terms of Service ("Terms"). If you do not agree to these Terms, do not use Chronos.
+        </p>
+
+        <h2>2. About Chronos</h2>
+        <p>
+            Chronos is a Chrome extension that uses artificial intelligence to help you create calendar events using natural language. Chronos is an individual developer project operated from the United Arab Emirates.
+        </p>
+
+        <h2>3. Eligibility</h2>
+        <p>
+            You must be at least 13 years old to use Chronos. By using Chronos, you represent and warrant that you meet this age requirement and have the legal capacity to enter into these Terms.
+        </p>
+
+        <h2>4. License and Use</h2>
+        <p>
+            Subject to these Terms, we grant you a limited, non-exclusive, non-transferable, revocable license to use Chronos for your personal or business calendar management needs.
+        </p>
+
+        <h3>You May:</h3>
+        <ul>
+            <li>Install and use Chronos on devices you own or control</li>
+            <li>Create calendar events using natural language</li>
+            <li>Connect your Google Calendar and/or Outlook Calendar</li>
+            <li>Use voice input to create events</li>
+        </ul>
+
+        <h3>You May Not:</h3>
+        <ul>
+            <li>Reverse engineer, decompile, or disassemble Chronos</li>
+            <li>Modify, adapt, or create derivative works of Chronos</li>
+            <li>Use Chronos for any illegal or unauthorized purpose</li>
+            <li>Abuse or overload our API services or third-party APIs</li>
+            <li>Attempt to gain unauthorized access to Chronos systems</li>
+            <li>Use Chronos to send spam or create malicious calendar events</li>
+            <li>Redistribute or resell Chronos without permission</li>
+        </ul>
+
+        <h2>5. Service Availability</h2>
+        <p>
+            Chronos is currently provided free of charge. We reserve the right to:
+        </p>
+        <ul>
+            <li>Introduce paid features or premium tiers in the future</li>
+            <li>Modify, suspend, or discontinue any part of Chronos at any time</li>
+            <li>Limit usage or features for free users</li>
+            <li>Provide advance notice of material changes when reasonably possible</li>
+        </ul>
+
+        <div class="warning-box">
+            <strong>⚠️ Service "As Is":</strong> Chronos is provided "AS IS" without warranties of any kind. We do not guarantee uninterrupted or error-free service.
+        </div>
+
+        <h2>6. Limitation of Liability</h2>
+        <p>
+            <strong>Important:</strong> Chronos uses AI to interpret natural language and create calendar events. While we strive for accuracy, AI can make mistakes.
+        </p>
+
+        <h3>We Are Not Responsible For:</h3>
+        <ul>
+            <li>Missed appointments due to incorrect event parsing</li>
+            <li>Wrong dates, times, or event details created by AI</li>
+            <li>Calendar conflicts or double-bookings</li>
+            <li>Loss of calendar data (your data is managed by Google/Microsoft)</li>
+            <li>Downtime of third-party services (OpenAI, Google, Microsoft)</li>
+            <li>Any damages, losses, or consequences arising from using Chronos</li>
+        </ul>
+
+        <p>
+            <strong>Always review events before confirming them.</strong> You are solely responsible for verifying the accuracy of calendar events created by Chronos.
+        </p>
+
+        <p>
+            TO THE MAXIMUM EXTENT PERMITTED BY LAW, CHRONOS AI SHALL NOT BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, OR ANY LOSS OF PROFITS OR REVENUES, WHETHER INCURRED DIRECTLY OR INDIRECTLY, OR ANY LOSS OF DATA, USE, GOODWILL, OR OTHER INTANGIBLE LOSSES.
+        </p>
+
+        <h2>7. Third-Party Services</h2>
+        <p>
+            Chronos integrates with third-party services including:
+        </p>
+        <ul>
+            <li><strong>OpenAI API:</strong> For natural language processing and voice transcription</li>
+            <li><strong>Google Calendar API:</strong> For creating and managing calendar events</li>
+            <li><strong>Microsoft Outlook API:</strong> For creating and managing calendar events</li>
+        </ul>
+
+        <p>
+            Your use of these third-party services is subject to their respective terms and privacy policies. We are not responsible for the availability, accuracy, or content of third-party services.
+        </p>
+
+        <h2>8. Intellectual Property</h2>
+
+        <h3>Your Content:</h3>
+        <p>
+            You retain all rights to your calendar events, input text, and any data you create using Chronos. We do not claim ownership of your content.
+        </p>
+
+        <h3>Our Content:</h3>
+        <p>
+            Chronos, including its name, logo, code, and design, is proprietary and protected by intellectual property laws. The "Chronos" trademark and all related marks are owned by Chronos AI.
+        </p>
+
+        <h2>9. Privacy and Data</h2>
+        <p>
+            Your privacy is important to us. Please review our <a href="/privacy">Privacy Policy</a> to understand how we handle your data. By using Chronos, you consent to our data practices as described in the Privacy Policy.
+        </p>
+
+        <h2>10. User Conduct</h2>
+        <p>
+            You agree to use Chronos responsibly and in compliance with all applicable laws. Prohibited activities include:
+        </p>
+        <ul>
+            <li>Creating malicious, harmful, or offensive calendar events</li>
+            <li>Using Chronos to harass, abuse, or harm others</li>
+            <li>Attempting to circumvent usage limits or restrictions</li>
+            <li>Interfering with the operation of Chronos or its infrastructure</li>
+            <li>Violating any laws or regulations in the UAE or your jurisdiction</li>
+        </ul>
+
+        <h2>11. Termination</h2>
+        <p>
+            You may stop using Chronos at any time by uninstalling the extension and revoking calendar access permissions in your Google or Microsoft account settings.
+        </p>
+
+        <p>
+            We reserve the right to terminate or suspend access to Chronos for violations of these Terms, illegal activity, or any reason at our discretion.
+        </p>
+
+        <h2>12. Changes to Terms</h2>
+        <p>
+            We may update these Terms from time to time. Material changes will be communicated by updating the "Last Updated" date at the top of this page. Continued use of Chronos after changes constitutes acceptance of the updated Terms.
+        </p>
+
+        <h2>13. Governing Law and Disputes</h2>
+        <p>
+            These Terms are governed by the laws of the United Arab Emirates. Any disputes arising from these Terms or your use of Chronos shall be subject to the exclusive jurisdiction of the courts of the United Arab Emirates.
+        </p>
+
+        <h2>14. Severability</h2>
+        <p>
+            If any provision of these Terms is found to be invalid or unenforceable, the remaining provisions shall remain in full force and effect.
+        </p>
+
+        <h2>15. Entire Agreement</h2>
+        <p>
+            These Terms, together with our Privacy Policy, constitute the entire agreement between you and Chronos AI regarding your use of Chronos.
+        </p>
+
+        <div class="contact-box">
+            <h2>Contact Us</h2>
+            <p>If you have questions about these Terms of Service, please contact us:</p>
+            <p>
+                <strong>Email:</strong> <a href="mailto:chronosai.feedback@gmail.com">chronosai.feedback@gmail.com</a><br>
+                <strong>Website:</strong> <a href="https://www.chronosai.org">www.chronosai.org</a>
+            </p>
+        </div>
+
+        <hr>
+
+        <p style="text-align: center; color: #999; font-size: 0.95em;">
+            © 2025 Chronos AI. All rights reserved.
+        </p>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>
+            <a href="/privacy">Privacy Policy</a>
+            <a href="/terms">Terms of Service</a>
+            <a href="/cookies">Cookie Policy</a>
+            <a href="/gdpr">GDPR & Data Protection</a>
+        </p>
+        <p style="margin-top: 16px;">&copy; 2025 ChronosAI. All rights reserved.</p>
+    </footer>
+</body>
+</html>

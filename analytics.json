@@ -1,5 +1,5 @@
 {
-  "totalVisits": 117,
+  "totalVisits": 120,
   "uniqueVisitors": 1,
   "visits": [
     {
@@ -818,6 +818,27 @@
       "timestamp": "2025-10-24T15:42:15.376Z",
       "ip": "::1",
       "userAgent": "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Mobile Safari/537.36",
+      "referer": "direct",
+      "path": "/"
+    },
+    {
+      "timestamp": "2025-10-25T19:02:30.639Z",
+      "ip": "::1",
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "referer": "direct",
+      "path": "/"
+    },
+    {
+      "timestamp": "2025-10-25T19:03:40.650Z",
+      "ip": "::1",
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+      "referer": "direct",
+      "path": "/"
+    },
+    {
+      "timestamp": "2025-10-25T20:02:30.149Z",
+      "ip": "::1",
+      "userAgent": "curl/8.9.1",
       "referer": "direct",
       "path": "/"
     }
